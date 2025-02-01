@@ -50,14 +50,24 @@ public class RobotContainer {
         configureBindings();
     }
 
+    private double velocityCurveTranslate(double joystickInput) { 
+        if(joystickInput > 0){
+          return Math.pow(joystickInput, 2.1);
+        } else if (joystickInput < 0){
+          return -Math.pow(-joystickInput, 2.1);
+        } else {
+          return 0;
+        }
+      }
+
     private void configureBindings() {
         // Note that X is defined as forward according to WPILib convention,
         // and Y is defined as to the left according to WPILib convention.
         drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
-                drive.withVelocityX(-joystick.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
-                    .withVelocityY(-joystick.getLeftX() * MaxSpeed) // Drive left with negative X (left)
+                drive.withVelocityX(-velocityCurveTranslate(joystick.getLeftY()) * MaxSpeed) // Drive forward with negative Y (forward)
+                    .withVelocityY(-velocityCurveTranslate(joystick.getLeftX()) * MaxSpeed) // Drive left with negative X (left)
                     .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
             )
         );
