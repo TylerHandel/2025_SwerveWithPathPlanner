@@ -11,6 +11,8 @@ import com.ctre.phoenix6.swerve.SwerveRequest;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 
+import com.reduxrobotics.canand.CanandEventLoop;
+
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -48,6 +50,7 @@ public class RobotContainer {
         SmartDashboard.putData("Auto Mode", autoChooser);
 
         configureBindings();
+        configureCanandColor();
     }
 
     private double velocityCurveTranslate(double joystickInput) { 
@@ -95,6 +98,11 @@ public class RobotContainer {
         joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
         drivetrain.registerTelemetry(logger::telemeterize);
+    }
+
+    public void configureCanandColor() {
+        // This will start Redux CANLink manually for Java
+        CanandEventLoop.getInstance();
     }
 
     public Command getAutonomousCommand() {
