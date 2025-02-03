@@ -31,7 +31,7 @@ public class CoralSensor {
     }
 
     public static boolean isCoralDetected() {
-        return isConnected() && instance.canandcolor.getProximity() > coralThreshold;
+        return isConnected() && instance.canandcolor.getProximity() < coralThreshold;
     }
 
     private static boolean isConnected() {
