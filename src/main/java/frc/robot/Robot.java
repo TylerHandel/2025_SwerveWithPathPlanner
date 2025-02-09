@@ -25,9 +25,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
 
-    if (CoralSensor.isCoralDetected()) {
-      System.out.println("Coral detected");
-    }
+    System.out.println(CoralSensor.isCoralDetected());
 
     /*
      * This example of adding Limelight is very simple and may not be sufficient for on-field use.

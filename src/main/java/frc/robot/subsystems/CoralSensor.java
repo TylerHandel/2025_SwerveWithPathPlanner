@@ -31,14 +31,10 @@ public class CoralSensor {
     }
 
     public static boolean isCoralDetected() {
-        return isConnected() && instance.canandcolor.getProximity() < coralThreshold;
+        return isConnected() && getInstance().canandcolor.getProximity() < coralThreshold;
     }
 
     private static boolean isConnected() {
-        if (instance == null) {
-            System.out.println("Coral Sensor not initialized");
-            return false;
-        }
-        return instance.canandcolor.isConnected();
+        return getInstance().canandcolor.isConnected();
     }
 }
