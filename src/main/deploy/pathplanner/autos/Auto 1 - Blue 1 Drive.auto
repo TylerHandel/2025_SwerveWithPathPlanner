@@ -9,6 +9,18 @@
           "data": {
             "pathName": "Blue 1 Drive Out"
           }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Blue 1  Drive Back"
+          }
         }
       ]
     }
