@@ -14,7 +14,7 @@ import com.reduxrobotics.sensors.canandcolor.Canandcolor;
 public class CoralSensor {
     private static CoralSensor instance;
     private final int canId = 15; // CAN ID of the Coral Sensor
-    private static final double coralThreshold = 0.4; // Threshold for coral detection
+    private static final double coralThreshold = 0.15; // Threshold for coral detection
 
     private Canandcolor canandcolor;
 
