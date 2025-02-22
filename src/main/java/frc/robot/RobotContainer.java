@@ -13,7 +13,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 
 import com.reduxrobotics.canand.CanandEventLoop;
 
-import edu.wpi.first.math.geometry.Rotation2d;
+//import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.Intake;
 import frc.robot.commands.Outtake;
+import frc.robot.commands.StopIntake;
 import frc.robot.commands.Throwup;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -35,7 +36,7 @@ public class RobotContainer {
             .withDeadband(MaxSpeed * 0.01).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
     private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
-    private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
+    //private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
     private final SwerveRequest.RobotCentric forwardStraight = new SwerveRequest.RobotCentric()
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
 
@@ -100,8 +101,9 @@ public class RobotContainer {
         joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
 
         joystick.y().onTrue(new Intake(m_launcher));
-        joystick.x().onTrue(new Outtake(m_launcher));
-        joystick.b().onTrue(new Throwup(m_launcher));
+        //joystick.x().onTrue(new Outtake(m_launcher));
+        joystick.x().onTrue(new Outtake(m_launcher).withTimeout(2).andThen(new StopIntake(m_launcher)));
+        joystick.b().onTrue(new Throwup(m_launcher).withTimeout(2).andThen(new StopIntake(m_launcher)));
         drivetrain.registerTelemetry(logger::telemeterize);
     }
 
@@ -113,5 +115,6 @@ public class RobotContainer {
     public Command getAutonomousCommand() {
         /* Run the path selected from the auto chooser */
         return autoChooser.getSelected();
+        
     }
 }
