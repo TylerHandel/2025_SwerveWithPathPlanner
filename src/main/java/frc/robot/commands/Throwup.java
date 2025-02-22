@@ -2,21 +2,21 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.CoralLauncher;
-import frc.robot.subsystems.CoralSensor;
-public class Outtake extends Command{
+
+public class Throwup extends Command{
     private CoralLauncher m_launcher;
-    public Outtake(CoralLauncher launcher) {
+    public Throwup(CoralLauncher launcher) {
         m_launcher = launcher;
         addRequirements(m_launcher);
     }
 
     @Override
     public void initialize() {
-        m_launcher.setIntakeWheel(1);
+        m_launcher.setIntakeWheel(-1);
     }
     @Override
     public boolean isFinished() {
-        return !CoralSensor.isCoralDetected();
+        return false;
     }
 
     @Override

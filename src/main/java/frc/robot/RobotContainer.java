@@ -21,6 +21,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.Intake;
 import frc.robot.commands.Outtake;
+import frc.robot.commands.Throwup;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.CoralLauncher;
@@ -100,6 +101,7 @@ public class RobotContainer {
 
         joystick.y().onTrue(new Intake(m_launcher));
         joystick.x().onTrue(new Outtake(m_launcher));
+        joystick.b().onTrue(new Throwup(m_launcher));
         drivetrain.registerTelemetry(logger::telemeterize);
     }
 
