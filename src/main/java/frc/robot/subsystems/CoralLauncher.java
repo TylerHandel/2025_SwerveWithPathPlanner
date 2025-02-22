@@ -4,6 +4,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import frc.robot.Constants;
 
 public class CoralLauncher implements Subsystem {
 
@@ -16,8 +17,8 @@ public class CoralLauncher implements Subsystem {
 
     /** Creates a new Launcher. */
     public CoralLauncher() {
-        m_intakeWheel = new TalonFX(16);
-        m_outtakeWheel = new TalonFX(17);
+        m_intakeWheel = new TalonFX(Constants.CoralLauncher.kIntakeId);
+        m_outtakeWheel = new TalonFX(Constants.CoralLauncher.kOuttakeId);
     }
 
     /**

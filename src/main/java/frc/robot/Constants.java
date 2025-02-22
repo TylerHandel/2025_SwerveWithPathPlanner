@@ -1,3 +1,5 @@
+package frc.robot;
+
 public final class Constants {
     public static class CoralLauncher {
         public static final int kIntakeId = 17;
