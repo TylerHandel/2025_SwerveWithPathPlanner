@@ -7,13 +7,61 @@
         {
           "type": "path",
           "data": {
-            "pathName": "TestPath"
+            "pathName": "Startline Pos 1 to Reef"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "OuttakeFirst"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "TestPath"
+            "pathName": "Reef to Coral Station"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Coral Station to Reef"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "OuttakeSecond"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Reef to Coral Station"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Coral Station to Reef"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "OuttakeSecond"
           }
         }
       ]

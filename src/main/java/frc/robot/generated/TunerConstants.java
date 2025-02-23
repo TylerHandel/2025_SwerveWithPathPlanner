@@ -86,11 +86,11 @@ public class TunerConstants {
 
     // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;
     // This may need to be tuned to your individual robot
-    private static final double kCoupleRatio = 5.4;
+    private static final double kCoupleRatio = 5.4; // 5.4 OR 8.0/3.0
 
     private static final double kDriveGearRatio = 5.67;
     private static final double kSteerGearRatio = 12.1;
-    private static final Distance kWheelRadius = Inches.of(2);
+    private static final Distance kWheelRadius = Inches.of(2.2);
 
     private static final boolean kInvertLeftSide = false;
     private static final boolean kInvertRightSide = true;
@@ -98,8 +98,8 @@ public class TunerConstants {
     private static final int kPigeonId = 1;
 
     // These are only used for simulation
-    private static final MomentOfInertia kSteerInertia = KilogramSquareMeters.of(0.01);
-    private static final MomentOfInertia kDriveInertia = KilogramSquareMeters.of(0.01);
+    private static final MomentOfInertia kSteerInertia = KilogramSquareMeters.of(0.01); // 0.01
+    private static final MomentOfInertia kDriveInertia = KilogramSquareMeters.of(0.01); // 0.01
     // Simulated voltage necessary to overcome friction
     private static final Voltage kSteerFrictionVoltage = Volts.of(0.2);
     private static final Voltage kDriveFrictionVoltage = Volts.of(0.2);

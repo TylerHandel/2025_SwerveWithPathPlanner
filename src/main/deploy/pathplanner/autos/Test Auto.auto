@@ -7,31 +7,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Start Line to Reef"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
+            "pathName": "Reef to Coral Station"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Blue 1  Drive Back"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
+            "pathName": "Coral Station to Reef"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Blue 1 Drive Out"
+            "pathName": "Reef to Coral Station"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Coral Station to Reef"
           }
         }
       ]

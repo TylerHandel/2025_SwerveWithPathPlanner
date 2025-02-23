@@ -10,7 +10,7 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
 import com.pathplanner.lib.auto.AutoBuilder;
-
+import com.pathplanner.lib.auto.NamedCommands;
 import com.reduxrobotics.canand.CanandEventLoop;
 
 //import edu.wpi.first.math.geometry.Rotation2d;
@@ -20,7 +20,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.Intake;
-import frc.robot.commands.Outtake;
+import frc.robot.commands.OuttakeFirst;
+import frc.robot.commands.OuttakeSecond;
 import frc.robot.commands.StopIntake;
 import frc.robot.commands.Throwup;
 import frc.robot.generated.TunerConstants;
@@ -52,11 +53,18 @@ public class RobotContainer {
     private final SendableChooser<Command> autoChooser;
 
     public RobotContainer() {
+        NamedCommands.registerCommand("Intake", new Intake(m_launcher));
+        NamedCommands.registerCommand("OuttakeFirst", new OuttakeFirst(m_launcher));
+        NamedCommands.registerCommand("OuttakeSecond", new OuttakeSecond(m_launcher));
+        NamedCommands.registerCommand("StopIntake", new StopIntake(m_launcher));
+
         autoChooser = AutoBuilder.buildAutoChooser("Tests");
         SmartDashboard.putData("Auto Mode", autoChooser);
 
         configureBindings();
         configureCanandColor();
+        
+        
     }
 
     private double velocityCurveTranslate(double joystickInput) { 
@@ -102,8 +110,10 @@ public class RobotContainer {
 
         joystick.y().onTrue(new Intake(m_launcher));
         //joystick.x().onTrue(new Outtake(m_launcher));
-        joystick.x().onTrue(new Outtake(m_launcher).withTimeout(2).andThen(new StopIntake(m_launcher)));
-        joystick.b().onTrue(new Throwup(m_launcher).withTimeout(2).andThen(new StopIntake(m_launcher)));
+        joystick.b().onTrue(new OuttakeSecond(m_launcher));
+        joystick.x().onTrue(new OuttakeFirst(m_launcher));
+        joystick.povDown().onTrue(new Throwup(m_launcher));
+        joystick.rightBumper().onTrue(new StopIntake(m_launcher));
         drivetrain.registerTelemetry(logger::telemeterize);
     }
 

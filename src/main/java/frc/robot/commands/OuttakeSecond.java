@@ -1,22 +1,26 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.CoralLauncher;
-import frc.robot.subsystems.CoralSensor;
-public class Outtake extends Command{
+
+public class OuttakeSecond extends Command{
     private CoralLauncher m_launcher;
-    public Outtake(CoralLauncher launcher) {
+    private Timer time = new Timer();
+    public OuttakeSecond(CoralLauncher launcher) {
         m_launcher = launcher;
         addRequirements(m_launcher);
     }
 
     @Override
     public void initialize() {
-        m_launcher.setIntakeWheel(1);
+        m_launcher.setIntakeWheel(0.85);
+        time.reset();
+        time.start();
     }
     @Override
     public boolean isFinished() {
-        return !CoralSensor.isCoralDetected();
+        return time.get() > 2;
     }
 
     @Override

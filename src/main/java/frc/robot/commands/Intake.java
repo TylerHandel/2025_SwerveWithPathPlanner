@@ -13,7 +13,7 @@ public class Intake extends Command{
 
     @Override
     public void initialize() {
-        m_launcher.setIntakeWheel(0.5);
+        m_launcher.setIntakeWheel(0.35);
     }
     @Override
     public boolean isFinished() {
