@@ -13,6 +13,7 @@ public class StopIntake extends Command{
     @Override
     public void initialize() {
         m_launcher.setIntakeWheel(0);
+        m_launcher.setOuttakeWheel(0);
     }
     @Override
     public boolean isFinished() {
@@ -22,9 +23,11 @@ public class StopIntake extends Command{
     @Override
     public void end(boolean interrupted) {
         m_launcher.setIntakeWheel(0);
+        m_launcher.setOuttakeWheel(0);
     }
 
     public void stopIntake() {
         m_launcher.setIntakeWheel(0);
+        m_launcher.setOuttakeWheel(0);
     }
 }

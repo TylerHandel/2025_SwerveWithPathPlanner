@@ -19,12 +19,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
+import frc.robot.commands.ClimbDown;
+import frc.robot.commands.ClimbUp;
 import frc.robot.commands.Intake;
 import frc.robot.commands.OuttakeFirst;
 import frc.robot.commands.OuttakeSecond;
 import frc.robot.commands.StopIntake;
 import frc.robot.commands.Throwup;
 import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.CoralLauncher;
 
@@ -48,6 +51,8 @@ public class RobotContainer {
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
 
     private final CoralLauncher m_launcher = new CoralLauncher();
+
+    private final Climber m_climber = new Climber();
 
     /* Path follower */
     private final SendableChooser<Command> autoChooser;
@@ -91,12 +96,12 @@ public class RobotContainer {
 
         joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
 
-        joystick.pov(0).whileTrue(drivetrain.applyRequest(() ->
-            forwardStraight.withVelocityX(0.5).withVelocityY(0))
-        );
-        joystick.pov(180).whileTrue(drivetrain.applyRequest(() ->
-            forwardStraight.withVelocityX(-0.5).withVelocityY(0))
-        );
+        //joystick.pov(0).whileTrue(drivetrain.applyRequest(() ->
+        //    forwardStraight.withVelocityX(0.5).withVelocityY(0))
+        //);
+        //joystick.pov(180).whileTrue(drivetrain.applyRequest(() ->
+        //    forwardStraight.withVelocityX(-0.5).withVelocityY(0))
+        //);
 
         // Run SysId routines when holding back/start and X/Y.
         // Note that each routine should be run exactly once in a single log.
@@ -110,10 +115,12 @@ public class RobotContainer {
 
         joystick.y().onTrue(new Intake(m_launcher));
         //joystick.x().onTrue(new Outtake(m_launcher));
-        joystick.b().onTrue(new OuttakeSecond(m_launcher));
+        joystick.rightBumper().onTrue(new OuttakeSecond(m_launcher));
         joystick.x().onTrue(new OuttakeFirst(m_launcher));
-        joystick.povDown().onTrue(new Throwup(m_launcher));
-        joystick.rightBumper().onTrue(new StopIntake(m_launcher));
+        joystick.povLeft().onTrue(new Throwup(m_launcher));
+        joystick.b().onTrue(new StopIntake(m_launcher));
+        joystick.povDown().whileTrue(new ClimbDown(m_climber));
+        joystick.povUp().whileTrue(new ClimbUp(m_climber));
         drivetrain.registerTelemetry(logger::telemeterize);
     }
 

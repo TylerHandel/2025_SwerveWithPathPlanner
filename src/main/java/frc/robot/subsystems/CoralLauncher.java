@@ -34,8 +34,7 @@ public class CoralLauncher implements Subsystem {
      */
     public Command getIntakeCommand() {
         // The startEnd helper method takes a method to call when the command is
-        // initialized and one to
-        // call when it ends
+        // initialized and one to call when it ends
         return this.startEnd(
                 // When the command is initialized, set the wheels to the intake speed values
                 () -> {
