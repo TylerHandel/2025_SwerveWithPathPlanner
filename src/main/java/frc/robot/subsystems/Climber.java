@@ -1,7 +1,9 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.controls.DutyCycleOut;
+import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
+import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.units.measure.Angle;
@@ -20,6 +22,7 @@ public class Climber implements Subsystem {
     /** Creates a new Climber. */
     public Climber() {
         m_climberMotor = new TalonFX(Constants.Climber.kClimberMotorId);
+        
     }
 
     /**
@@ -59,11 +62,11 @@ public class Climber implements Subsystem {
     }
 
     // An accessor method to set the position of the climber
-    public void setClimberMotor(double speed) {
+    public void setClimberMotor(double position) {
         
-        m_climberMotor.set(speed);
-        System.out.println(m_climberMotor.getPosition().getValueAsDouble());
         
+        
+        m_climberMotor.setControl(new PositionVoltage(position));
 
         
         

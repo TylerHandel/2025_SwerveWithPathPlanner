@@ -13,7 +13,7 @@ public class ClimbDown extends Command{
 
     @Override
     public void initialize() {
-        m_Climber.setClimberMotor(-0.1);
+        m_Climber.setClimberMotor(0);
     }
     @Override
     public boolean isFinished() {
