@@ -1,10 +1,13 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix6.configs.Slot0Configs;
+import com.ctre.phoenix6.configs.Slot1Configs;
 import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
+
 
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -18,10 +21,13 @@ public class Climber implements Subsystem {
     // Climber positions for top and bottom of arm
     private static final double kClimberTopPositionRevolutions = 2; // num rotations to get to top of climber
     private static final double kClimberBottomPositionRevolutions = 0;
+    private static final Slot0Configs climberGains = new Slot0Configs()
+    .withKP(10).withKI(0).withKD(0);
 
     /** Creates a new Climber. */
     public Climber() {
         m_climberMotor = new TalonFX(Constants.Climber.kClimberMotorId);
+        m_climberMotor.getConfigurator().apply(climberGains);
         
     }
 
