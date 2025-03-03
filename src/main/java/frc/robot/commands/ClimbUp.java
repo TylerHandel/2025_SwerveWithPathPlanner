@@ -13,7 +13,7 @@ public class ClimbUp extends Command{
 
     @Override
     public void initialize() {
-        m_Climber.setClimberMotor(2);
+        m_Climber.setClimberMotor(0);
     }
     @Override
     public boolean isFinished() {

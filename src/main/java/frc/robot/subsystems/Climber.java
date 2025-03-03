@@ -6,6 +6,7 @@ import com.ctre.phoenix6.controls.DutyCycleOut;
 import com.ctre.phoenix6.controls.MotionMagicVoltage;
 import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.PositionVoltage;
+import com.ctre.phoenix6.controls.StaticBrake;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 
@@ -22,7 +23,7 @@ public class Climber implements Subsystem {
     private static final double kClimberTopPositionRevolutions = 2; // num rotations to get to top of climber
     private static final double kClimberBottomPositionRevolutions = 0;
     private static final Slot0Configs climberGains = new Slot0Configs()
-    .withKP(10).withKI(0).withKD(0);
+    .withKP(1).withKI(0).withKD(0);
 
     /** Creates a new Climber. */
     public Climber() {
@@ -72,7 +73,7 @@ public class Climber implements Subsystem {
         
         
         
-        m_climberMotor.setControl(new PositionVoltage(position));
+        m_climberMotor.setControl(new PositionVoltage(position).withVelocity(0.1));
 
         
         
@@ -82,7 +83,7 @@ public class Climber implements Subsystem {
 
     // A helper method to stop the climber.
     public void stop() {
-        m_climberMotor.set(0);
+        m_climberMotor.setControl(new StaticBrake());
     }
 
 }
