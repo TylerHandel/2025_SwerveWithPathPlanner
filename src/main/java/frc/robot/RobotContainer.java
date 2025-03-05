@@ -92,6 +92,28 @@ public class RobotContainer {
                     .withVelocityY(-velocityCurveTranslate(joystick.getLeftX()) * MaxSpeed) // Drive left with negative X (left)
                     .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
             )
+
+/* need to put in some code to make sure we're tracking the right apriltags but otherwise try this for alignment to apriltag */
+/* old code with Tyler's limelight addition 
+   drivetrain.setDefaultCommand( // Drivetrain will execute this command periodically
+        drivetrain.applyRequest(() -> 
+          drive.withVelocityX(-velocityCurveTranslate(joystick.getLeftY()) * MaxSpeed) // Drive forward with negative Y (forward)
+            .withVelocityY(-velocityCurveTranslate(joystick.getLeftX()) * MaxSpeed) // Drive left with negative X (left)
+            .withRotationalRate(joystick.getRightX() * MaxAngularRate + LimelightHelpers.getTX("") * 0.1
+            ) // Drive counterclockwise with negative X (left)
+        ));
+      //  above code follows target rotationally using limelight commands
+ */
+ /* old code
+    joystick.rightBumper().whileTrue(
+      drivetrain.applyRequest(() -> drive.withVelocityX(-velocityCurveTranslate(joystick.getLeftY()) * MaxSpeed) // Drive forward with
+                                                                                          // negative Y (forward)
+            .withVelocityY(-velocityCurveTranslate(joystick.getLeftX()) * MaxSpeed) // Drive left with negative X (left)
+            .withRotationalRate(joystick.getRightX() * MaxAngularRate + (LimelightHelpers.getTX("") * 0.1)
+            ) // Drive counterclockwise with negative X (left)
+        ));
+ */ 
+
         );
 
         joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
