@@ -23,13 +23,12 @@ public class Climber implements Subsystem {
     private static final double kClimberTopPositionRevolutions = 2; // num rotations to get to top of climber
     private static final double kClimberBottomPositionRevolutions = 0;
     private static final Slot0Configs climberGains = new Slot0Configs()
-    .withKP(1).withKI(0).withKD(0);
+    .withKP(2.4).withKI(0).withKD(0.1); // was 1, 0, 0
 
     /** Creates a new Climber. */
     public Climber() {
         m_climberMotor = new TalonFX(Constants.Climber.kClimberMotorId);
         m_climberMotor.getConfigurator().apply(climberGains);
-        
     }
 
     /**
@@ -70,17 +69,9 @@ public class Climber implements Subsystem {
 
     // An accessor method to set the position of the climber
     public void setClimberMotor(double position) {
-        
-        
-        
         m_climberMotor.setControl(new PositionVoltage(position).withVelocity(0.1));
-
-        
-        
-        
     }
     
-
     // A helper method to stop the climber.
     public void stop() {
         m_climberMotor.setControl(new StaticBrake());

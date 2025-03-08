@@ -41,9 +41,10 @@ public class RobotContainer {
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
     private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
     //private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
-    private final SwerveRequest.RobotCentric forwardStraight = new SwerveRequest.RobotCentric()
+    /* private final SwerveRequest.RobotCentric forwardStraight = new SwerveRequest.RobotCentric()
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
-
+    */
+    
     private final Telemetry logger = new Telemetry(MaxSpeed);
     private final CommandXboxController joystick = new CommandXboxController(0);
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
@@ -86,8 +87,8 @@ public class RobotContainer {
                 drive.withVelocityX(-velocityCurveTranslate(joystick.getLeftY()) * MaxSpeed) // Drive forward with negative Y (forward)
                     .withVelocityY(-velocityCurveTranslate(joystick.getLeftX()) * MaxSpeed) // Drive left with negative X (left)
                     .withRotationalRate(-joystick.getRightX() * MaxAngularRate
-                                                + LimelightHelpers.getTX("") * 0.1 //Adds in Limelight ApriltAg following
-                    ) // Drive counterclockwise with negative X (left)
+                   //                             + LimelightHelpers.getTX("") * 0.1 //Adds in Limelight AprilTag following
+                ) // Drive counterclockwise with negative X (left)
             )
         );
 
