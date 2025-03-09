@@ -1,17 +1,9 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix6.configs.Slot0Configs;
-import com.ctre.phoenix6.configs.Slot1Configs;
-import com.ctre.phoenix6.controls.DutyCycleOut;
-import com.ctre.phoenix6.controls.MotionMagicVoltage;
-import com.ctre.phoenix6.controls.PositionDutyCycle;
 import com.ctre.phoenix6.controls.PositionVoltage;
 import com.ctre.phoenix6.controls.StaticBrake;
 import com.ctre.phoenix6.hardware.TalonFX;
-
-
-import edu.wpi.first.units.measure.Angle;
-import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Constants;
 
@@ -20,8 +12,6 @@ public class Climber implements Subsystem {
     private final TalonFX m_climberMotor;
     
     // Climber positions for top and bottom of arm
-    private static final double kClimberTopPositionRevolutions = 2; // num rotations to get to top of climber
-    private static final double kClimberBottomPositionRevolutions = 0;
     private static final Slot0Configs climberGains = new Slot0Configs()
     .withKP(2.4).withKI(0).withKD(0.1); // was 1, 0, 0
 
@@ -38,6 +28,7 @@ public class Climber implements Subsystem {
      * that need to span subsystems. The Subsystem class has helper methods, such as the startEnd
      * method used here, to create these commands.
      */
+    /* 
     public Command getClimberUpCommand() {
         // The startEnd helper method takes a method to call when the command is
         // initialized and one to call when it ends
@@ -66,10 +57,10 @@ public class Climber implements Subsystem {
                     stop();
                 });
     }
-
+*/
     // An accessor method to set the position of the climber
     public void setClimberMotor(double position) {
-        m_climberMotor.setControl(new PositionVoltage(position).withVelocity(0.1));
+        m_climberMotor.setControl(new PositionVoltage(position));
     }
     
     // A helper method to stop the climber.

@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.Climber;
 
 public class ClimbDown extends Command{
@@ -13,7 +14,7 @@ public class ClimbDown extends Command{
 
     @Override
     public void initialize() {
-        m_Climber.setClimberMotor(32);
+        m_Climber.setClimberMotor(Constants.Climber.kClimberBottomPositionRevolutions);
     }
     @Override
     public boolean isFinished() {

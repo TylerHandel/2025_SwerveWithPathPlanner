@@ -8,5 +8,7 @@ public final class Constants {
     }
     public static class Climber {
         public static final int kClimberMotorId = 18;
+        public static final double kClimberTopPositionRevolutions = 0.0;
+        public static final double kClimberBottomPositionRevolutions = 32.0;
     }
 } 

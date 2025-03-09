@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 10.345389344258013,
-        "y": 1.519
+        "x": 3.8360655737704916,
+        "y": 2.868186475409835
       },
       "prevControl": null,
       "nextControl": {
-        "x": 11.345389344258015,
-        "y": 1.519
+        "x": 2.4047085892048767,
+        "y": 1.6613079352461926
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Blue Reef Bottom Left"
     },
     {
       "anchor": {
-        "x": 13.749897540988123,
-        "y": 2.8801741803328182
+        "x": 1.3066598360618717,
+        "y": 0.9501536885306883
       },
       "prevControl": {
-        "x": 14.301331967208831,
-        "y": 2.4246413934353668
+        "x": 2.064308715373798,
+        "y": 1.8380025577227315
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "Blue Bottom Coral Station"
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -58.603087751675254
+    "rotation": 56.30993247473408
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 179.10482628964937
+    "rotation": -119.74488129694231
   },
   "useDefaultConstraints": true
 }

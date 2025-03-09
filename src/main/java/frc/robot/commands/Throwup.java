@@ -15,6 +15,7 @@ public class Throwup extends Command{
     @Override
     public void initialize() {
         m_launcher.setIntakeWheel(-1);
+        m_launcher.setOuttakeWheel(-1);
         time.reset();
         time.start();
     }
@@ -26,9 +27,11 @@ public class Throwup extends Command{
     @Override
     public void end(boolean interrupted) {
         m_launcher.setIntakeWheel(0);
+        m_launcher.setOuttakeWheel(0);
     }
 
     public void stopOuttake() {
         m_launcher.setIntakeWheel(0);
+        m_launcher.setOuttakeWheel(0);
     }
 }

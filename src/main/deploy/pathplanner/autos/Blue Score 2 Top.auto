@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Startline Pos 1 to Reef"
+            "pathName": "Blue Startline Pos 1 to Blue Reef"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Reef to Coral Station"
+            "pathName": "Blue Top Left Reef to Blue Top Coral Station"
           }
         },
         {
@@ -31,7 +31,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Coral Station to Reef"
+            "pathName": "Blue Top Coral Station to Blue Top Left Reef"
           }
         },
         {
@@ -43,7 +43,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Reef to Coral Station"
+            "pathName": "Blue Top Left Reef to Blue Top Coral Station"
           }
         },
         {
@@ -55,7 +55,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Coral Station to Reef"
+            "pathName": "Blue Top Coral Station to Blue Top Left Reef"
           }
         },
         {
