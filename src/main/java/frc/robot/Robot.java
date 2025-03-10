@@ -7,6 +7,8 @@ package frc.robot;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -43,7 +45,14 @@ public class Robot extends TimedRobot {
       double omegaRps = Units.radiansToRotations(driveState.Speeds.omegaRadiansPerSecond);
 
       LimelightHelpers.SetRobotOrientation("limelight-front", headingDeg, 0, 0, 0, 0, 0);
-      var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight-front");
+      
+      /* Original code to get pose estimate from Limelight assumes Blue field orientation */
+      // var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight-front");
+
+      /* Updated code checks field orientation and uses appropriate pose estimate call */
+      var llMeasurement = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red
+        ? LimelightHelpers.getBotPoseEstimate_wpiRed_MegaTag2("limelight-front")
+        : LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight-front");
 
       /* Original Pose Update from Vision code. This uses X, Y and Z values from vision and resets pose of robot. */
       /*
@@ -55,7 +64,11 @@ public class Robot extends TimedRobot {
       /* New Vision Pose Update code. This uses just the X and Y (location on field) values from vision and does not overwrite the 
        * gyro-based Z (rotation) value. The assumption is that the gyro is relatively accurate throughout the match and does not need
        * to be updated.
+       * 
+       * If this doesn't work, can always try wpiRed_MegaTag2 instead of wpiBlue_MegaTag2 when on red field. Try it first with just code 
+       * in this block and then later make a switch statement to change the tag type based on field color.
       */
+      
       if (llMeasurement != null && llMeasurement.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
         m_robotContainer.drivetrain.addVisionMeasurement(new Pose2d(
                                           new Translation2d(
