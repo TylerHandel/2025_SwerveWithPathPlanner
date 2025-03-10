@@ -46,10 +46,12 @@ public class Robot extends TimedRobot {
       var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight-front");
 
       /* Original Pose Update from Vision code. This uses X, Y and Z values from vision and resets pose of robot. */
+      /*
       if (llMeasurement != null && llMeasurement.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
         m_robotContainer.drivetrain.addVisionMeasurement(llMeasurement.pose, llMeasurement.timestampSeconds);
       }
-
+      */
+      
       /* New Vision Pose Update code. This uses just the X and Y (location on field) values from vision and does not overwrite the 
        * gyro-based Z (rotation) value. The assumption is that the gyro is relatively accurate throughout the match and does not need
        * to be updated.
