@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -15,7 +17,7 @@ public class Robot extends TimedRobot {
 
   private final RobotContainer m_robotContainer;
 
-  private final boolean kUseLimelight = false;
+  private final boolean kUseLimelight = true;
 
   public Robot() {
     m_robotContainer = new RobotContainer();
@@ -42,8 +44,23 @@ public class Robot extends TimedRobot {
 
       LimelightHelpers.SetRobotOrientation("limelight-front", headingDeg, 0, 0, 0, 0, 0);
       var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight-front");
+
+      /* Original Pose Update from Vision code. This uses X, Y and Z values from vision and resets pose of robot. */
       if (llMeasurement != null && llMeasurement.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
         m_robotContainer.drivetrain.addVisionMeasurement(llMeasurement.pose, llMeasurement.timestampSeconds);
+      }
+
+      /* New Vision Pose Update code. This uses just the X and Y (location on field) values from vision and does not overwrite the 
+       * gyro-based Z (rotation) value. The assumption is that the gyro is relatively accurate throughout the match and does not need
+       * to be updated.
+      */
+      if (llMeasurement != null && llMeasurement.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
+        m_robotContainer.drivetrain.addVisionMeasurement(new Pose2d(
+                                          new Translation2d(
+                                              llMeasurement.pose.getTranslation().getX(),
+                                              llMeasurement.pose.getTranslation().getY()),
+                                              driveState.Pose.getRotation()),
+                                          llMeasurement.timestampSeconds);
       }
     }
   }
