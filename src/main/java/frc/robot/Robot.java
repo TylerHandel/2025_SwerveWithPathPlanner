@@ -19,8 +19,6 @@ public class Robot extends TimedRobot {
 
   private final RobotContainer m_robotContainer;
 
-  private final boolean kUseLimelight = true;
-
   public Robot() {
     m_robotContainer = new RobotContainer();
   }
@@ -29,7 +27,7 @@ public class Robot extends TimedRobot {
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
 
-    System.out.println(CoralSensor.isCoralDetected());
+    System.out.println("Coral detected: %s/f".formatted(Boolean.toString(CoralSensor.isCoralDetected())));
 
     /*
      * This example of adding Limelight is very simple and may not be sufficient for on-field use.
@@ -39,20 +37,20 @@ public class Robot extends TimedRobot {
      * This example is sufficient to show that vision integration is possible, though exact implementation
      * of how to use vision should be tuned per-robot and to the team's specification.
      */
-    if (kUseLimelight) {
+    if (Constants.Vision.kUseLimelight) {
       var driveState = m_robotContainer.drivetrain.getState();
       double headingDeg = driveState.Pose.getRotation().getDegrees();
       double omegaRps = Units.radiansToRotations(driveState.Speeds.omegaRadiansPerSecond);
 
-      LimelightHelpers.SetRobotOrientation("limelight-front", headingDeg, 0, 0, 0, 0, 0);
+      LimelightHelpers.SetRobotOrientation(Constants.Vision.kLimelightFront, headingDeg, 0, 0, 0, 0, 0);
       
       /* Original code to get pose estimate from Limelight assumes Blue field orientation */
       // var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight-front");
 
       /* Updated code checks field orientation and uses appropriate pose estimate call */
       var llMeasurement = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red
-        ? LimelightHelpers.getBotPoseEstimate_wpiRed_MegaTag2("limelight-front")
-        : LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2("limelight-front");
+        ? LimelightHelpers.getBotPoseEstimate_wpiRed_MegaTag2(Constants.Vision.kLimelightFront)
+        : LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.Vision.kLimelightFront);
 
       /* Original Pose Update from Vision code. This uses X, Y and Z values from vision and resets pose of robot. */
       /*
