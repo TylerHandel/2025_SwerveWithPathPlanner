@@ -63,8 +63,7 @@ public class Robot extends TimedRobot {
        * gyro-based Z (rotation) value. The assumption is that the gyro is relatively accurate throughout the match and does not need
        * to be updated.
        * 
-       * If this doesn't work, can always try wpiRed_MegaTag2 instead of wpiBlue_MegaTag2 when on red field. Try it first with just code 
-       * in this block and then later make a switch statement to change the tag type based on field color.
+       * This also used wpiRed_MegaTag2 instead of wpiBlue_MegaTag2 when on red field.
       */
       
       if (llMeasurement != null && llMeasurement.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
