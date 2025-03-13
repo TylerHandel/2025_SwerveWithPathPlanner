@@ -53,19 +53,19 @@ public class Robot extends TimedRobot {
         : LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.Vision.kLimelightFront);
 
       /* Original Pose Update from Vision code. This uses X, Y and Z values from vision and resets pose of robot. */
-      /*
+      
       if (llMeasurement != null && llMeasurement.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
         m_robotContainer.drivetrain.addVisionMeasurement(llMeasurement.pose, llMeasurement.timestampSeconds);
       }
-      */
       
       /* New Vision Pose Update code. This uses just the X and Y (location on field) values from vision and does not overwrite the 
        * gyro-based Z (rotation) value. The assumption is that the gyro is relatively accurate throughout the match and does not need
        * to be updated.
        * 
-       * This also used wpiRed_MegaTag2 instead of wpiBlue_MegaTag2 when on red field.
+       * This may not be needed with MegaTag2 since MegaTag2 is only supposed to update X and Y values.
       */
       
+      /* Commenting out for now 
       if (llMeasurement != null && llMeasurement.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
         m_robotContainer.drivetrain.addVisionMeasurement(new Pose2d(
                                           new Translation2d(
@@ -74,6 +74,7 @@ public class Robot extends TimedRobot {
                                               driveState.Pose.getRotation()),
                                           llMeasurement.timestampSeconds);
       }
+      */
     }
   }
 
