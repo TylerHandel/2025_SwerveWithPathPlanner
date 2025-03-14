@@ -45,13 +45,13 @@ public class Robot extends TimedRobot {
       LimelightHelpers.SetRobotOrientation(Constants.Vision.kLimelightFront, headingDeg, 0, 0, 0, 0, 0);
       
       /* Original code to get pose estimate from Limelight assumes Blue field orientation */
-      // var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.Vision.kLimelightFront);
+      var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.Vision.kLimelightFront);
 
       /* Updated code checks field orientation and uses appropriate pose estimate call */
-      var llMeasurement = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red
+      /* var llMeasurement = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red
         ? LimelightHelpers.getBotPoseEstimate_wpiRed_MegaTag2(Constants.Vision.kLimelightFront)
         : LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.Vision.kLimelightFront);
-
+      */
       /* Original Pose Update from Vision code. This uses X, Y and Z values from vision and resets pose of robot. */
       
       if (llMeasurement != null && llMeasurement.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
