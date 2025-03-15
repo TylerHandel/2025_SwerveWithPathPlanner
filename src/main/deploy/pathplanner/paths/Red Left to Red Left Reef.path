@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.1268442622950818,
-        "y": 6.955993852459016
+        "x": 10.4,
+        "y": 1.5
       },
       "prevControl": null,
       "nextControl": {
-        "x": 1.0604915177795227,
-        "y": 7.197027695093723
+        "x": 12.671110655741987,
+        "y": 1.5685000000000002
       },
       "isLocked": false,
-      "linkedName": "CoralStation"
+      "linkedName": "Red Startline Pos 2"
     },
     {
       "anchor": {
-        "x": 3.8360655737721374,
-        "y": 5.158
+        "x": 13.749897540988123,
+        "y": 2.8801741803328182
       },
       "prevControl": {
-        "x": 1.7324352997976145,
-        "y": 5.5715248147815375
+        "x": 14.110647540988126,
+        "y": 2.1684241803328184
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Blue Reef Top Left"
+      "linkedName": "Red Reef Bottom Right"
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 119.74488129647952
+    "rotation": -57.97862191685645
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -53.81522102322314
+    "rotation": 179.8908720191003
   },
   "useDefaultConstraints": true
 }

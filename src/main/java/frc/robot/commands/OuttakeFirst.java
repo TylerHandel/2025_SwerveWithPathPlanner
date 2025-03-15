@@ -15,7 +15,7 @@ public class OuttakeFirst extends Command{
 
     @Override
     public void initialize() {
-        m_launcher.setIntakeWheel(0.225);
+        m_launcher.setIntakeWheel(0.2);
         m_launcher.setOuttakeWheel(0.2);
         time.reset();
         time.start();

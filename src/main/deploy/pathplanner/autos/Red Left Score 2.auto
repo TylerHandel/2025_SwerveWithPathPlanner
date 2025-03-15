@@ -1,0 +1,61 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Red Left to Red Left Reef"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "OuttakeFirst"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Red Left Reef to Red Left Station"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Red Left Station to Red Left Reef"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "OuttakeSecond"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Red Left Reef to Red Left Station"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

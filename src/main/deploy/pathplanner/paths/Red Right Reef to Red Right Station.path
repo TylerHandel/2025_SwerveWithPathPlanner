@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 10.603,
-        "y": 1.4802499999999998
+        "x": 13.7865,
+        "y": 5.10725
       },
       "prevControl": null,
       "nextControl": {
-        "x": 12.874110655741987,
-        "y": 1.5487499999999998
+        "x": 14.028872969812193,
+        "y": 6.085988689795826
       },
       "isLocked": false,
-      "linkedName": "Red Startline Pos 2"
+      "linkedName": "Red Right Reef"
     },
     {
       "anchor": {
-        "x": 13.749897540988123,
-        "y": 2.8801741803328182
+        "x": 16.38,
+        "y": 7.028
       },
       "prevControl": {
-        "x": 14.110647540988126,
-        "y": 2.1684241803328184
+        "x": 16.180551132430487,
+        "y": 6.46483895764519
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Red Reef Bottom Right"
+      "linkedName": "Red Right Station"
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -57.97862191685645
+    "rotation": -125.53767779197435
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 0.0
+    "rotation": 61.46754679300276
   },
   "useDefaultConstraints": true
 }

@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.8360655737704916,
-        "y": 2.868186475409835
+        "x": 7.16625,
+        "y": 4.0249999999999995
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.4047085892048767,
-        "y": 1.6613079352461926
+        "x": 6.916250003486507,
+        "y": 4.025041752290128
       },
       "isLocked": false,
-      "linkedName": "Blue Reef Bottom Left"
+      "linkedName": "Blue Startline Center"
     },
     {
       "anchor": {
-        "x": 1.3066598360618717,
-        "y": 0.9501536885306883
+        "x": 5.810999999999999,
+        "y": 4.0249999999999995
       },
       "prevControl": {
-        "x": 2.064308715373798,
-        "y": 1.8380025577227315
+        "x": 6.060999975546019,
+        "y": 4.025110575718638
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Blue Bottom Coral Station"
+      "linkedName": "Blue Back Reef"
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 56.30993247473408
+    "rotation": 0.0
   },
   "reversed": false,
   "folder": null,
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -119.74488129694231
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }
