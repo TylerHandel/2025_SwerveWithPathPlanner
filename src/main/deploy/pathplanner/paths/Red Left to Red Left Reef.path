@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 10.4,
-        "y": 1.5
+        "x": 10.429303278688524,
+        "y": 1.45
       },
       "prevControl": null,
       "nextControl": {
-        "x": 12.671110655741987,
-        "y": 1.5685000000000002
+        "x": 12.700413934430511,
+        "y": 1.5185000000000002
       },
       "isLocked": false,
       "linkedName": "Red Startline Pos 2"

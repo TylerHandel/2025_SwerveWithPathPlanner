@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 7.15,
-        "y": 6.531
+        "x": 7.132684426226533,
+        "y": 6.6
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.416414205064174,
-        "y": 6.659566384454127
+        "x": 5.399098631290707,
+        "y": 6.728566384454127
       },
       "isLocked": false,
       "linkedName": "Blue Startline Pos 1"

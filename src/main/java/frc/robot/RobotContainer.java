@@ -113,10 +113,10 @@ public class RobotContainer {
 
         joystick.y().onTrue(new Intake(m_launcher));
         //joystick.x().onTrue(new Outtake(m_launcher));
-        joystick.rightBumper().onTrue(new OuttakeSecond(m_launcher));
+        joystick.b().onTrue(new OuttakeSecond(m_launcher));
         joystick.x().onTrue(new OuttakeFirst(m_launcher));
-        joystick.povLeft().onTrue(new Throwup(m_launcher));
-        joystick.b().onTrue(new StopIntake(m_launcher));
+        joystick.povLeft().whileTrue(new Throwup(m_launcher));
+        joystick.rightBumper().onTrue(new StopIntake(m_launcher));
         joystick.povDown().whileTrue(new ClimbDown(m_climber));
         joystick.povUp().whileTrue(new ClimbUp(m_climber));
         drivetrain.registerTelemetry(logger::telemeterize);
