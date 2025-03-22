@@ -12,7 +12,7 @@ public final class Constants {
         public static final double kClimberBottomPositionRevolutions = 40.0;
     }
     public static class Vision {
-        public static final boolean kUseLimelight = false;
+        public static final boolean kUseLimelight = true;
         public static final String kLimelightFront = "limelight-front";
         public static final String kLimelightBack = "limelight-back";
     }

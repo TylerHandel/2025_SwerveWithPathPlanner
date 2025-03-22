@@ -42,10 +42,10 @@ public class Robot extends TimedRobot {
       double headingDeg = driveState.Pose.getRotation().getDegrees();
       double omegaRps = Units.radiansToRotations(driveState.Speeds.omegaRadiansPerSecond);
 
-      LimelightHelpers.SetRobotOrientation(Constants.Vision.kLimelightFront, headingDeg, 0, 0, 0, 0, 0);
+      LimelightHelpers.SetRobotOrientation(Constants.Vision.kLimelightBack, headingDeg, 0, 0, 0, 0, 0);
       
       /* Original code to get pose estimate from Limelight assumes Blue field orientation */
-      var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.Vision.kLimelightFront);
+      var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.Vision.kLimelightBack);
 
       /* Updated code checks field orientation and uses appropriate pose estimate call */
       /* var llMeasurement = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red
