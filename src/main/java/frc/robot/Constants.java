@@ -1,6 +1,10 @@
 package frc.robot;
 
+
 public final class Constants {
+    public final class Controllers {
+        public static final int kJoystickId = 0;
+    }
     public static class CoralLauncher {
         public static final int kIntakeId = 17;
         public static final int kOuttakeId = 16;
@@ -16,7 +20,7 @@ public final class Constants {
         public static final String kLimelightFront = "limelight-front";
         public static final String kLimelightBack = "limelight-back";
     }
-    public static class CANdi {
-        public static final int kCANdiId = 19;
+    public static class CANdle {
+        public static final int kCANdleID = 19;
     }
 } 

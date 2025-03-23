@@ -5,8 +5,6 @@
 package frc.robot;
 
 import static edu.wpi.first.units.Units.*;
-
-import frc.robot.subsystems.CANdleSystem;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
@@ -31,6 +29,7 @@ import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.CoralLauncher;
+import frc.robot.subsystems.CANdleSystem;
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -50,16 +49,16 @@ public class RobotContainer {
     */
     
     private final Telemetry logger = new Telemetry(MaxSpeed);
-    private final CommandXboxController joystick = new CommandXboxController(0);
+    private final CommandXboxController joystick = new CommandXboxController(Constants.Controllers.kJoystickId);
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
     private final CoralLauncher m_launcher = new CoralLauncher();
     private final Climber m_climber = new Climber();
-    private final CANdleSystem CANdle = new CANdleSystem(joystick);
+    private final CANdleSystem m_CANdle = new CANdleSystem(joystick);
 
-    /* Path follower */
+    /* Path follower */ 
     private final SendableChooser<Command> autoChooser;
 
-    private RobotContainer() {
+    public RobotContainer() {
         NamedCommands.registerCommand("Intake", new Intake(m_launcher));
         NamedCommands.registerCommand("OuttakeFirst", new OuttakeFirst(m_launcher));
         NamedCommands.registerCommand("OuttakeSecond", new OuttakeSecond(m_launcher));
@@ -72,7 +71,7 @@ public class RobotContainer {
         configureCanandColor();
     }
 
-    /* Code to modulate speed of swerve drive based on joystick input */
+    /* Modulate speed of swerve drive based on joystick input */
     private double velocityCurveTranslate(double joystickInput) { 
         if(joystickInput > 0){
           return Math.pow(joystickInput, 2.9);

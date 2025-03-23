@@ -20,7 +20,7 @@ import frc.robot.subsystems.CoralSensor;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  public final RobotContainer m_robotContainer;
+  private final RobotContainer m_robotContainer;
 
   public Robot() {
     m_robotContainer = new RobotContainer();

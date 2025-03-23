@@ -21,7 +21,7 @@ import com.ctre.phoenix.led.TwinkleAnimation.TwinklePercent;
 import com.ctre.phoenix.led.TwinkleOffAnimation.TwinkleOffPercent;
 
 public class CANdleSystem extends SubsystemBase {
-    private final CANdle m_candle = new CANdle(Constants.CANdleConstants.kCANdleID);
+    private final CANdle m_candle = new CANdle(Constants.CANdle.kCANdleID);
     private final int LedCount = 300;
     private CommandXboxController joystick;
 
@@ -41,8 +41,8 @@ public class CANdleSystem extends SubsystemBase {
     }
     private AnimationTypes m_currentAnimation;
 
-    public CANdleSystem(CommandXboxController joystick2) {
-        this.joystick = joystick2;
+    public CANdleSystem(CommandXboxController joy) {
+        this.joystick = joy;
         changeAnimation(AnimationTypes.SetAll);
         CANdleConfiguration configAll = new CANdleConfiguration();
         configAll.statusLedOffWhenActive = true;
@@ -185,15 +185,8 @@ public class CANdleSystem extends SubsystemBase {
         else {
             changeAnimation(AnimationTypes.Rainbow);
         }
-        
-        
-        
-
-
-
+    
         m_candle.animate(m_toAnimate);
-
-
     }
 
     @Override
