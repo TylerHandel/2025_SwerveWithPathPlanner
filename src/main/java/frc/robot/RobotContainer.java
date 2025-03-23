@@ -40,6 +40,8 @@ public class RobotContainer {
             .withDeadband(MaxSpeed * 0.01).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
     private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
+    private final SwerveRequest.RobotCentric driveRobotCentric = new SwerveRequest.RobotCentric();
+    
     //private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
     /* private final SwerveRequest.RobotCentric forwardStraight = new SwerveRequest.RobotCentric()
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
@@ -92,8 +94,14 @@ public class RobotContainer {
             )
         );
 
-        joystick.a().whileTrue(drivetrain.applyRequest(() -> brake));
-
+        joystick.povRight().whileTrue(drivetrain.applyRequest(() -> brake));
+        joystick.b().whileTrue(drivetrain.applyRequest(() -> 
+            driveRobotCentric.withVelocityY(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[0]*5)
+            .withVelocityX(LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[2]*1)
+            .withRotationalRate((-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[4]*0.1))));  
+        
+        
+        
         //joystick.pov(0).whileTrue(drivetrain.applyRequest(() ->
         //    forwardStraight.withVelocityX(0.5).withVelocityY(0))
         //);
@@ -113,7 +121,7 @@ public class RobotContainer {
 
         joystick.y().onTrue(new Intake(m_launcher));
         //joystick.x().onTrue(new Outtake(m_launcher));
-        joystick.b().onTrue(new OuttakeSecond(m_launcher));
+        joystick.a().onTrue(new OuttakeSecond(m_launcher));
         joystick.x().onTrue(new OuttakeFirst(m_launcher));
         joystick.povLeft().whileTrue(new Throwup(m_launcher));
         joystick.rightBumper().onTrue(new StopIntake(m_launcher));
