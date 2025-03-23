@@ -16,4 +16,7 @@ public final class Constants {
         public static final String kLimelightFront = "limelight-front";
         public static final String kLimelightBack = "limelight-back";
     }
+    public static class CANdi {
+        public static final int kCANdiId = 19;
+    }
 } 

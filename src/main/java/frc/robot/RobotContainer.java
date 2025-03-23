@@ -6,6 +6,7 @@ package frc.robot;
 
 import static edu.wpi.first.units.Units.*;
 
+import frc.robot.subsystems.CANdleSystem;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
@@ -42,6 +43,7 @@ public class RobotContainer {
     private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
     private final SwerveRequest.RobotCentric driveRobotCentric = new SwerveRequest.RobotCentric();
     
+    
     //private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
     /* private final SwerveRequest.RobotCentric forwardStraight = new SwerveRequest.RobotCentric()
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
@@ -52,11 +54,12 @@ public class RobotContainer {
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
     private final CoralLauncher m_launcher = new CoralLauncher();
     private final Climber m_climber = new Climber();
+    private final CANdleSystem CANdle = new CANdleSystem(joystick);
 
     /* Path follower */
     private final SendableChooser<Command> autoChooser;
 
-    public RobotContainer() {
+    private RobotContainer() {
         NamedCommands.registerCommand("Intake", new Intake(m_launcher));
         NamedCommands.registerCommand("OuttakeFirst", new OuttakeFirst(m_launcher));
         NamedCommands.registerCommand("OuttakeSecond", new OuttakeSecond(m_launcher));
@@ -69,7 +72,7 @@ public class RobotContainer {
         configureCanandColor();
     }
 
-    /* Comments here */
+    /* Code to modulate speed of swerve drive based on joystick input */
     private double velocityCurveTranslate(double joystickInput) { 
         if(joystickInput > 0){
           return Math.pow(joystickInput, 2.9);
@@ -100,8 +103,6 @@ public class RobotContainer {
             .withVelocityX(LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[2]*1)
             .withRotationalRate((-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[4]*0.1))));  
         
-        
-        
         //joystick.pov(0).whileTrue(drivetrain.applyRequest(() ->
         //    forwardStraight.withVelocityX(0.5).withVelocityY(0))
         //);
@@ -118,7 +119,7 @@ public class RobotContainer {
 
         // reset the field-centric heading on left bumper press
         joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
-
+        
         joystick.y().onTrue(new Intake(m_launcher));
         //joystick.x().onTrue(new Outtake(m_launcher));
         joystick.a().onTrue(new OuttakeSecond(m_launcher));

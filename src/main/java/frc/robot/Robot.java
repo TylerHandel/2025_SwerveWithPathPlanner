@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.configs.CANdiConfiguration;
+import com.ctre.phoenix6.controls.ControlRequest;
+
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.util.Units;
@@ -17,7 +20,7 @@ import frc.robot.subsystems.CoralSensor;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  private final RobotContainer m_robotContainer;
+  public final RobotContainer m_robotContainer;
 
   public Robot() {
     m_robotContainer = new RobotContainer();
@@ -29,52 +32,24 @@ public class Robot extends TimedRobot {
 
    // System.out.println("Coral detected: %s/f".formatted(Boolean.toString(CoralSensor.isCoralDetected())));
 
-    /*
-     * This example of adding Limelight is very simple and may not be sufficient for on-field use.
-     * Users typically need to provide a standard deviation that scales with the distance to target
-     * and changes with number of tags available.
-     *
-     * This example is sufficient to show that vision integration is possible, though exact implementation
-     * of how to use vision should be tuned per-robot and to the team's specification.
-     */
+  /* Update robot pose every cycle using Limelight cameras and AprilTags   */
     if (Constants.Vision.kUseLimelight) {
+
+      boolean changedPose = false;
+      // First, tell Limelight your robot's current orientation
       var driveState = m_robotContainer.drivetrain.getState();
       double headingDeg = driveState.Pose.getRotation().getDegrees();
       double omegaRps = Units.radiansToRotations(driveState.Speeds.omegaRadiansPerSecond);
-
       LimelightHelpers.SetRobotOrientation(Constants.Vision.kLimelightBack, headingDeg, 0, 0, 0, 0, 0);
-      
+    
       /* Original code to get pose estimate from Limelight assumes Blue field orientation */
       var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.Vision.kLimelightBack);
 
-      /* Updated code checks field orientation and uses appropriate pose estimate call */
-      /* var llMeasurement = DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red
-        ? LimelightHelpers.getBotPoseEstimate_wpiRed_MegaTag2(Constants.Vision.kLimelightFront)
-        : LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.Vision.kLimelightFront);
-      */
-      /* Original Pose Update from Vision code. This uses X, Y and Z values from vision and resets pose of robot. */
-      
+      /* This uses X,Y values from vision and resets pose of robot. */
       if (llMeasurement != null && llMeasurement.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
         m_robotContainer.drivetrain.addVisionMeasurement(llMeasurement.pose, llMeasurement.timestampSeconds);
+        System.out.println("LL Pose Update: " + m_robotContainer.drivetrain.getState().Pose);
       }
-      
-      /* New Vision Pose Update code. This uses just the X and Y (location on field) values from vision and does not overwrite the 
-       * gyro-based Z (rotation) value. The assumption is that the gyro is relatively accurate throughout the match and does not need
-       * to be updated.
-       * 
-       * This may not be needed with MegaTag2 since MegaTag2 is only supposed to update X and Y values.
-      */
-      
-      /* Commenting out for now 
-      if (llMeasurement != null && llMeasurement.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
-        m_robotContainer.drivetrain.addVisionMeasurement(new Pose2d(
-                                          new Translation2d(
-                                              llMeasurement.pose.getTranslation().getX(),
-                                              llMeasurement.pose.getTranslation().getY()),
-                                              driveState.Pose.getRotation()),
-                                          llMeasurement.timestampSeconds);
-      }
-      */
     }
   }
 
