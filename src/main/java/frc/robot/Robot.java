@@ -42,7 +42,7 @@ public class Robot extends TimedRobot {
       LimelightHelpers.SetRobotOrientation(Constants.Vision.kLimelightBack, headingDeg, 0, 0, 0, 0, 0);
       LimelightHelpers.SetRobotOrientation(Constants.Vision.kLimelightFront, headingDeg, 0, 0, 0, 0, 0);
 
-      /* Original code to get pose estimate from Limelight assumes Blue field orientation */
+      /* Get pose estimate from Limelight assumes Blue field orientation */
       var llMeasurementBack = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.Vision.kLimelightBack);
       var llMeasurementFront = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.Vision.kLimelightFront);
 
