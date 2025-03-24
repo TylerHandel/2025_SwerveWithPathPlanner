@@ -60,8 +60,7 @@ public class CoralLauncher implements Subsystem {
     }
 
     // A helper method to stop both wheels. You could skip having a method like this
-    // and call the
-    // individual accessors with speed = 0 instead
+    // and call the individual accessors with speed = 0 instead
     public void stop() {
         m_intakeWheel.set(0);
         m_outtakeWheel.set(0);

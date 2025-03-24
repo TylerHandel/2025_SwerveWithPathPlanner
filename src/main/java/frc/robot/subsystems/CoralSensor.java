@@ -2,6 +2,8 @@ package frc.robot.subsystems;
 
 import com.reduxrobotics.sensors.canandcolor.Canandcolor;
 
+import frc.robot.Constants;
+
 /**
  * CoralSensor class is a singleton class that represents the Coral Sensor
  * connected to the robot. It uses the Canandcolor class to communicate with the
@@ -13,7 +15,7 @@ import com.reduxrobotics.sensors.canandcolor.Canandcolor;
  */
 public class CoralSensor {
     private static CoralSensor instance;
-    private final int canId = 15; // CAN ID of the Coral Sensor
+    private final int canId = Constants.Sensors.kCoralSensorId; // CAN ID of the Coral Sensor
     private static final double coralThreshold = 0.15; // Threshold for coral detection
 
     private Canandcolor canandcolor;

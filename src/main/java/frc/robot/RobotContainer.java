@@ -19,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
+import frc.robot.commands.DriveToReefApriltag;
 import frc.robot.commands.Intake;
 import frc.robot.commands.OuttakeFirst;
 import frc.robot.commands.OuttakeSecond;
@@ -28,6 +29,7 @@ import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.CoralLauncher;
+import frc.robot.subsystems.VisionDriveSystem;
 import frc.robot.subsystems.CANdleSystem;
 
 public class RobotContainer {
@@ -59,6 +61,7 @@ public class RobotContainer {
     private final CoralLauncher m_launcher = new CoralLauncher();
     private final Climber m_climber = new Climber();
     private final CANdleSystem m_CANdle = new CANdleSystem(joystick);
+    private final VisionDriveSystem m_VisionDriveSystem = new VisionDriveSystem();
 
     /* Path follower */ 
     private final SendableChooser<Command> autoChooser;
@@ -68,6 +71,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("OuttakeFirst", new OuttakeFirst(m_launcher));
         NamedCommands.registerCommand("OuttakeSecond", new OuttakeSecond(m_launcher));
         NamedCommands.registerCommand("StopIntake", new StopIntake(m_launcher));
+        NamedCommands.registerCommand("DriveToReefApriltag", new DriveToReefApriltag(m_VisionDriveSystem));
 
         autoChooser = AutoBuilder.buildAutoChooser("Tests");
         SmartDashboard.putData("Auto Mode", autoChooser);
@@ -134,6 +138,9 @@ public class RobotContainer {
         joystick.povDown().whileTrue(new ClimbDown(m_climber));
         joystick.povUp().whileTrue(new ClimbUp(m_climber));
         drivetrain.registerTelemetry(logger::telemeterize);
+        
+        // Drive to reef apriltag when holding back and X
+        joystick.back().and(joystick.x().onTrue(new DriveToReefApriltag(m_VisionDriveSystem)));
     }
 
     public void configureCanandColor() {

@@ -6,11 +6,12 @@ import frc.robot.subsystems.CoralLauncher;
 import frc.robot.subsystems.CoralSensor;
 
 public class Intake extends Command{
+
     private CoralLauncher m_launcher;
     private Timer time = new Timer();
+
     public Intake(CoralLauncher launcher) {
         m_launcher = launcher;
-        
         addRequirements(m_launcher);
     }
 

@@ -9,7 +9,12 @@ public final class Constants {
     public static class CoralLauncher {
         public static final int kIntakeId = 17;
         public static final int kOuttakeId = 16;
-
+    }
+    public static class Sensors {
+        public static final int kCoralSensorId = 15;
+    }
+    public static class CANdle {
+        public static final int kCANdleID = 19;
     }
     public static class Climber {
         public static final int kClimberMotorId = 18;
@@ -25,6 +30,24 @@ public final class Constants {
             kLimelightBack
         };
         public static double[][] kAprilTagLocations = {
+             /* Array of locations corresponding to AprilTag constants.
+              * Assumes Blue origin coordinate system
+              * The XYZ Origin is established in the bottom left corner of
+              * the field. An x coordinate of 0 is aligned with the Blue Alliance Station
+              * diamond plate. A y coordinate of 0 is aligned with the
+              * side border polycarbonate on the Scoring Table side of
+              * the field. A z coordinate of 0 is on the carpet.
+              * +Z is up into the air from the carpet, +X is horizontal to the
+              * right (in this image above) toward the opposing alliance
+              * stations, and +Y runs from the Field Border towards the REEFS.
+              * The face-pose of the tags is denoted with 1 degree
+              * representation, the Z-rotation. 0° faces the red alliance
+              * station, 90° faces the non- scoring table side, and 180°
+              * faces the blue alliance station. For the X-Rotation, 0 is
+              * perpendicular to the Z plane, and 90 degrees is facing the carpet.
+              * Distances are measured to the center of the tag.
+              * Distances are measured in inches.
+              */
             {0, 0, 0, 0, 0}, // 0 - blue origin = not valid apriltag
             {657.37, 25.80, 58.50, 126, 0},  // 1
             {657.37, 291.20, 58.50, 234, 0}, // 2
@@ -34,8 +57,6 @@ public final class Constants {
             {530.49, 130.17, 12.13, 300, 0}  // 6
         };
     }
-    public static class CANdle {
-        public static final int kCANdleID = 19;
-    }
+
  
 } 
