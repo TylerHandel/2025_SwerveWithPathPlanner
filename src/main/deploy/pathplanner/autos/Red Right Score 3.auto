@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Blue Right to Blue Right Reef"
+            "pathName": "Red Right to Red Right Reef"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Blue Right Reef to Blue Right Station"
+            "pathName": "Red Right Reef to Red Right Station"
           }
         },
         {
@@ -37,7 +37,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Blue Right Station to Blue Right Reef"
+            "pathName": "Red Right Station to Red Right Reef"
           }
         },
         {
@@ -49,7 +49,31 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Blue Right Reef to Blue Right Station"
+            "pathName": "Red Right Reef to Red Right Station"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.75
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Intake"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Red Right Station to Red Right Reef"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "OuttakeFirst"
           }
         }
       ]

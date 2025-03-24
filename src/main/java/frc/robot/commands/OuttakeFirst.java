@@ -22,7 +22,7 @@ public class OuttakeFirst extends Command{
     }
     @Override
     public boolean isFinished() {
-        return time.get() > 2;
+        return time.get() > 1;
     }
 
     @Override

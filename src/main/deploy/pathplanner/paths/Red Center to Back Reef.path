@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 10.750993182974938,
-        "y": 3.965225196230335
+        "x": 10.744606381519143,
+        "y": 3.964090243379741
       },
       "isLocked": false,
       "linkedName": "Red Center"
@@ -20,8 +20,8 @@
         "y": 3.966499999999999
       },
       "prevControl": {
-        "x": 11.483189679712602,
-        "y": 3.970385791287613
+        "x": 11.424808468259762,
+        "y": 3.9709314825086643
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,8 +33,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 4.0,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,

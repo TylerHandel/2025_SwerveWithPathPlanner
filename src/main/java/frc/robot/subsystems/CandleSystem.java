@@ -22,7 +22,7 @@ import com.ctre.phoenix.led.TwinkleOffAnimation.TwinkleOffPercent;
 
 public class CANdleSystem extends SubsystemBase {
     private final CANdle m_candle = new CANdle(Constants.CANdle.kCANdleID);
-    private final int LedCount = 300;
+    private final int LedCount = 68;
     private CommandXboxController joystick;
 
     private Animation m_toAnimate = null;
@@ -160,7 +160,7 @@ public class CANdleSystem extends SubsystemBase {
                 m_toAnimate = null;
                 break;
         }
-        System.out.println("Changed to " + m_currentAnimation.toString());
+   //     System.out.println("Changed to " + m_currentAnimation.toString());
     }
 
     @Override
@@ -174,8 +174,8 @@ public class CANdleSystem extends SubsystemBase {
             m_candle.animate(m_toAnimate);
         }
         m_candle.modulateVBatOutput(joystick.getRightY());
-        if (LimelightHelpers.getTV("")){
-            if (joystick.rightBumper().getAsBoolean()){
+        if (LimelightHelpers.getTV(Constants.Vision.kLimelightBack)){
+            if (joystick.b().getAsBoolean()){
                 changeAnimation(AnimationTypes.StrobeOrange);
             }
             else {

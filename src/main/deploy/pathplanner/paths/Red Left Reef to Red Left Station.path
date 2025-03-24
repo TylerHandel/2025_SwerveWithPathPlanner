@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 14.07860439591867,
-        "y": 1.9333165391809337
+        "x": 14.269933325790868,
+        "y": 2.045761024412407
       },
       "isLocked": false,
       "linkedName": "Red Reef Bottom Right"
@@ -20,8 +20,8 @@
         "y": 1.0122500000000003
       },
       "prevControl": {
-        "x": 16.181609219185628,
-        "y": 1.6368206128612481
+        "x": 16.099208090463772,
+        "y": 1.6074365991492763
       },
       "nextControl": null,
       "isLocked": false,
@@ -33,8 +33,8 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 3.0,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 4.0,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
