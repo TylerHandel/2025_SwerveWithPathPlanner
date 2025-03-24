@@ -18,12 +18,12 @@ public final class Constants {
     }
     public static class Vision {
         public static final boolean kUseLimelight = true;
-        public static final String[] kLimelightNames = {
-            "limelight-front",
-            "limelight-back"
-        };
         public static final String kLimelightFront = "limelight-front";
         public static final String kLimelightBack = "limelight-back";
+        public static final String[] kLimelightNames = {
+            kLimelightFront,
+            kLimelightBack
+        };
     }
     public static class CANdle {
         public static final int kCANdleID = 19;
