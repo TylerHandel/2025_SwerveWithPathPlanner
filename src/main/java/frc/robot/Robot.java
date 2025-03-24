@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -27,27 +30,27 @@ public class Robot extends TimedRobot {
 
   /* Update robot pose every cycle using Limelight cameras and AprilTags   */
     if (Constants.Vision.kUseLimelight) {
-
-      // First, tell Limelight your robot's current orientation
+      // First, get your robot's current orientation from gyro
       var driveState = m_robotContainer.drivetrain.getState();
       double headingDeg = driveState.Pose.getRotation().getDegrees();
       double omegaRps = Units.radiansToRotations(driveState.Speeds.omegaRadiansPerSecond);
-      LimelightHelpers.SetRobotOrientation(Constants.Vision.kLimelightBack, headingDeg, 0, 0, 0, 0, 0);
-      LimelightHelpers.SetRobotOrientation(Constants.Vision.kLimelightFront, headingDeg, 0, 0, 0, 0, 0);
-
-      /* Get pose estimate from Limelight assumes Blue field orientation */
-      var llMeasurementBack = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.Vision.kLimelightBack);
-      var llMeasurementFront = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(Constants.Vision.kLimelightFront);
-
-      /* This uses X,Y values from vision and resets pose of robot. */
-      /* Uses Back camera AprilTags if available, otherwise uses Front camera AprilTags */
+      
+      // Set standard deviations for vision measurements
       m_robotContainer.drivetrain.setVisionMeasurementStdDevs(VecBuilder.fill(.5, .5, 9999999));
-      if (llMeasurementBack != null && llMeasurementBack.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
-        m_robotContainer.drivetrain.addVisionMeasurement(llMeasurementBack.pose, llMeasurementBack.timestampSeconds);
-        System.out.println("LLBack Pose Update: " + m_robotContainer.drivetrain.getState().Pose);
-      } else if (llMeasurementFront != null && llMeasurementFront.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
-        m_robotContainer.drivetrain.addVisionMeasurement(llMeasurementFront.pose, llMeasurementFront.timestampSeconds);
-        System.out.println("LLFront Pose Update: " + m_robotContainer.drivetrain.getState().Pose);
+
+      var m_limelightNames = Constants.Vision.kLimelightNames;
+      for (String m_limelightName : m_limelightNames) {
+        /* Set robot orientation using gyro value */
+        LimelightHelpers.SetRobotOrientation(m_limelightName, headingDeg, 0, 0, 0, 0, 0);
+        
+        /* Get pose estimate from Limelight assumes Blue field orientation */
+        var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(m_limelightName);
+        
+        if (llMeasurement != null && llMeasurement.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
+          /* This uses X,Y values from vision and resets pose of robot. */
+          m_robotContainer.drivetrain.addVisionMeasurement(llMeasurement.pose, llMeasurement.timestampSeconds);
+          System.out.println("LL " + m_limelightName + " Update: " + m_robotContainer.drivetrain.getState().Pose);
+        }
       }
     }
   }
