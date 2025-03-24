@@ -39,24 +39,16 @@ public class VisionDriveSystem implements Subsystem {
     * Distances are measured to the center of the tag.
     * Distances are measured in inches.
     */
-    private double[][] m_aprilTagLocations = {
-        {0, 0, 0, 0, 0}, // 0 - blue origin = not valid apriltag
-        {657.37, 25.80, 58.50, 126, 0},  // 1
-        {657.37, 291.20, 58.50, 234, 0}, // 2
-        {455.15, 317.15, 51.25, 270, 0}, // 3
-        {365.20, 241.64, 73.54, 0, 30},  // 4
-        {365.20, 75.39, 73.54, 0, 30}, // 5
-        {530.49, 130.17, 12.13, 300, 0}  // 6
-    };
+   
 
     // An accessor method to set the AprilTag target
     public void setVisionTarget(int aprilTagTarget) {
-        int  m_aprilTagTarget = aprilTagTarget;
+        double m_AprilTagTargetData[] = Constants.Vision.kAprilTagLocations[aprilTagTarget];
         final double InchestoMeters = 0.0254;
     
-        double targetX = m_aprilTagLocations[m_aprilTagTarget][0] * InchestoMeters;   // X coordinate in inches
-        double targetY = m_aprilTagLocations[m_aprilTagTarget][1] * InchestoMeters;   // Y coordinate in inches
-        double targetRot = m_aprilTagLocations[m_aprilTagTarget][3]; // Z rotaton in degrees
+        double targetX = m_AprilTagTargetData[0] * InchestoMeters;   // X coordinate in inches
+        double targetY = m_AprilTagTargetData[1] * InchestoMeters;   // Y coordinate in inches
+        double targetRot = m_AprilTagTargetData[3]; // Z rotaton in degrees
 
         // Create a list of waypoints from poses. Each pose represents one waypoint.
         // The rotation component of the pose should be the direction of travel. Do not use holonomic rotation.

@@ -8,7 +8,10 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -27,6 +30,13 @@ public class Robot extends TimedRobot {
     CommandScheduler.getInstance().run();
 
    // System.out.println("Coral detected: %s/f".formatted(Boolean.toString(CoralSensor.isCoralDetected())));
+
+  // Invert the joystick inputs if our alliance is red. The origin is always blue. 
+  // When our alliance is red, X and Y need to be inverted.
+  var alliance = DriverStation.getAlliance();
+  if (alliance.isPresent() && alliance.get() == Alliance.Red) {
+    m_robotContainer.joystickInvert = -1;
+  }
 
   /* Update robot pose every cycle using Limelight cameras and AprilTags   */
     if (Constants.Vision.kUseLimelight) {

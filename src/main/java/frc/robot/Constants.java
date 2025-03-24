@@ -24,8 +24,18 @@ public final class Constants {
             kLimelightFront,
             kLimelightBack
         };
+        public static double[][] kAprilTagLocations = {
+            {0, 0, 0, 0, 0}, // 0 - blue origin = not valid apriltag
+            {657.37, 25.80, 58.50, 126, 0},  // 1
+            {657.37, 291.20, 58.50, 234, 0}, // 2
+            {455.15, 317.15, 51.25, 270, 0}, // 3
+            {365.20, 241.64, 73.54, 0, 30},  // 4
+            {365.20, 75.39, 73.54, 0, 30},   // 5
+            {530.49, 130.17, 12.13, 300, 0}  // 6
+        };
     }
     public static class CANdle {
         public static final int kCANdleID = 19;
     }
+ 
 } 

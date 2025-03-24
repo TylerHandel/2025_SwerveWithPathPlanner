@@ -41,7 +41,13 @@ public class RobotContainer {
     private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
     private final SwerveRequest.RobotCentric driveRobotCentric = new SwerveRequest.RobotCentric();
     
-    
+    // Assume Blue Alliance unless otherwise specified.
+    // Checks for alliance color in robotperiodic and sets to -1 if red.
+    // Use this to invert joystick inputs when on Red Alliance.
+    // This means that when on Red or Blue team, origin is always Blue[0,0]
+    // But driver drives "forward" on red or blue side to move robot forward, etc.
+    public int joystickInvert = 1; 
+
     //private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
     /* private final SwerveRequest.RobotCentric forwardStraight = new SwerveRequest.RobotCentric()
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
@@ -87,15 +93,16 @@ public class RobotContainer {
         drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
-                drive.withVelocityX(-velocityCurveTranslate(joystick.getLeftY()) * MaxSpeed) // Drive forward with negative Y (forward)
-                    .withVelocityY(-velocityCurveTranslate(joystick.getLeftX()) * MaxSpeed) // Drive left with negative X (left)
-                    .withRotationalRate(-joystick.getRightX() * MaxAngularRate
-                   //                             + LimelightHelpers.getTX("") * 0.1 //Adds in Limelight AprilTag following
-                ) // Drive counterclockwise with negative X (left)
+                drive.withVelocityX(-velocityCurveTranslate(joystick.getLeftY()) * MaxSpeed * joystickInvert) // Drive forward with negative Y (forward)
+                    .withVelocityY(-velocityCurveTranslate(joystick.getLeftX()) * MaxSpeed * joystickInvert) // Drive left with negative X (left)
+                    .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Rotate with right stick X
             )
         );
 
+        // When hoilding down POV right directional key, apply brake
         joystick.povRight().whileTrue(drivetrain.applyRequest(() -> brake));
+
+        // When holding down B key, drive toward the nearest AprilTag
         joystick.b().whileTrue(drivetrain.applyRequest(() -> 
             driveRobotCentric.withVelocityY(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[0]*5)
             .withVelocityX(LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[2]*1)
