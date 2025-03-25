@@ -8,14 +8,13 @@ import edu.wpi.first.math.geometry.Pose3d;
 
 /**
  * Contains various field dimensions and useful reference points. All units are
- * in meters and poses
- * have a blue alliance origin.
+ * in meters and poses are defined to have a blue alliance origin.
  */
 public class FieldConstants {
-    private AprilTagFieldLayout fieldLayout  = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
+    private static AprilTagFieldLayout fieldLayout  = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
 
     // Example method to get the pose of a specific AprilTag by its ID
-    public Optional<Pose3d> getTagPose(int tagID) {
+    public static Optional<Pose3d> getTagPose(int tagID) {
         Optional<Pose3d> tagPose = fieldLayout.getTagPose(tagID);
 
         if (tagPose.isPresent()) {

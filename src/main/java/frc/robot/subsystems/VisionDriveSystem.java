@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import static edu.wpi.first.units.Units.Inches;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.path.GoalEndState;
@@ -11,10 +12,13 @@ import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.path.Waypoint;
 
 import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import frc.robot.Constants;
+import frc.robot.FieldConstants;
+
 
 public class VisionDriveSystem implements Subsystem {
 
@@ -25,17 +29,23 @@ public class VisionDriveSystem implements Subsystem {
    
     // An accessor method to set the AprilTag target
     public PathPlannerPath getPathToVisionTarget(int aprilTagTarget) {
+    
         double m_AprilTagTargetData[] = Constants.Vision.kAprilTagLocations[aprilTagTarget];
         final double InchestoMeters = 0.0254;
-    
+        Optional<Pose3d> targetPose3d = FieldConstants.getTagPose(aprilTagTarget); // Get the pose of the AprilTag
+        
+        /* Old code to look up apriltag pose info
         double targetX = m_AprilTagTargetData[0] * InchestoMeters;   // X coordinate in inches
         double targetY = m_AprilTagTargetData[1] * InchestoMeters;   // Y coordinate in inches
         double targetRot = m_AprilTagTargetData[3]; // Z rotaton in degrees
-
+        */
+        
         // Create a list of waypoints from poses. Each pose represents one waypoint.
         // The rotation component of the pose should be the direction of travel. Do not use holonomic rotation.
         List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses(
-            new Pose2d(targetX, targetY, Rotation2d.fromDegrees(targetRot)) //,
+         //   new Pose3d(targetPose3d.get().getX(), targetPose3d.get().getY(), targetPose3d.get().getRotation())
+            new Pose2d(targetPose3d.get().getX(), targetPose3d.get().getY(), targetPose3d.get().getRotation().toRotation2d())
+          // old code  new Pose2d(targetX, targetY, Rotation2d.fromDegrees(targetRot)) //,
         //    new Pose2d(3.0, 1.0, Rotation2d.fromDegrees(0)),
         //    new Pose2d(5.0, 3.0, Rotation2d.fromDegrees(90))
         );
