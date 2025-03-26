@@ -16,10 +16,6 @@ public class ClimbDown extends Command{
     public void initialize() {
         m_Climber.setClimberMotor(Constants.Climber.kClimberBottomPositionRevolutions);
     }
-    @Override
-    public boolean isFinished() {
-        return false;
-    }
 
     @Override
     public void end(boolean interrupted) {

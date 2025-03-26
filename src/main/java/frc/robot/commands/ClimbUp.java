@@ -16,10 +16,6 @@ public class ClimbUp extends Command{
     public void initialize() {
         m_Climber.setClimberMotor(Constants.Climber.kClimberTopPositionRevolutions);
     }
-    @Override
-    public boolean isFinished() {
-        return false;
-    }
 
     @Override
     public void end(boolean interrupted) {
