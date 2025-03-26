@@ -35,11 +35,7 @@ public class FollowPathToApriltag extends Command{
 
     @Override
     public void end(boolean interrupted) {
-        if (pathCommand != null) {
-            pathCommand.cancel();  // Ensure the path stops
-            pathCommand = null;    // Reset the command reference
-        }
-        m_VisionDriveSystem.stop();  // Stop the drivetrain when command ends
+        stopFollowPathToApriltag();
     }
 
     public void stopFollowPathToApriltag() {
@@ -47,5 +43,6 @@ public class FollowPathToApriltag extends Command{
             pathCommand.cancel();  // Stops the path-following command
             pathCommand = null;    // Reset the command reference
         }
+        m_VisionDriveSystem.stop();  // Stop the drivetrain motors
     }
 }
