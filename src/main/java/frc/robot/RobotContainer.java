@@ -20,10 +20,10 @@ import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
 import frc.robot.commands.DriveToReefApriltag;
-import frc.robot.commands.Intake;
-import frc.robot.commands.OuttakeFirst;
-import frc.robot.commands.OuttakeSecond;
-import frc.robot.commands.StopIntake;
+import frc.robot.commands.CoralIntakeStart;
+import frc.robot.commands.CoralScoreSlow;
+import frc.robot.commands.CoralScoreFast;
+import frc.robot.commands.CoralIntakeStop;
 import frc.robot.commands.Throwup;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Climber;
@@ -67,10 +67,10 @@ public class RobotContainer {
     private final SendableChooser<Command> autoChooser;
 
     public RobotContainer() {
-        NamedCommands.registerCommand("Intake", new Intake(m_launcher));
-        NamedCommands.registerCommand("OuttakeFirst", new OuttakeFirst(m_launcher));
-        NamedCommands.registerCommand("OuttakeSecond", new OuttakeSecond(m_launcher));
-        NamedCommands.registerCommand("StopIntake", new StopIntake(m_launcher));
+        NamedCommands.registerCommand("CoralIntakeStart", new CoralIntakeStart(m_launcher));
+        NamedCommands.registerCommand("CoralScoreSlow", new CoralScoreSlow(m_launcher));
+        NamedCommands.registerCommand("CoralScoreFast", new CoralScoreFast(m_launcher));
+        NamedCommands.registerCommand("CoralIntakeStop", new CoralIntakeStop(m_launcher));
         NamedCommands.registerCommand("DriveToReefApriltag", new DriveToReefApriltag(m_VisionDriveSystem));
 
         autoChooser = AutoBuilder.buildAutoChooser("Tests");
@@ -129,12 +129,12 @@ public class RobotContainer {
         // reset the field-centric heading on left bumper press
         joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
         
-        joystick.y().onTrue(new Intake(m_launcher));
+        joystick.y().onTrue(new CoralIntakeStart(m_launcher));
         //joystick.x().onTrue(new Outtake(m_launcher));
-        joystick.a().onTrue(new OuttakeSecond(m_launcher));
-        joystick.x().onTrue(new OuttakeFirst(m_launcher));
+        joystick.a().onTrue(new CoralScoreFast(m_launcher));
+        joystick.x().onTrue(new CoralScoreSlow(m_launcher));
         joystick.povLeft().whileTrue(new Throwup(m_launcher).withTimeout(2));
-        joystick.rightBumper().onTrue(new StopIntake(m_launcher));
+        joystick.rightBumper().onTrue(new CoralIntakeStop(m_launcher));
         joystick.povDown().whileTrue(new ClimbDown(m_climber));
         joystick.povUp().whileTrue(new ClimbUp(m_climber));
         drivetrain.registerTelemetry(logger::telemeterize);

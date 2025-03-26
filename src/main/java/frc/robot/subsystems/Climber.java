@@ -21,45 +21,8 @@ public class Climber implements Subsystem {
         m_climberMotor.getConfigurator().apply(climberGains);
     }
 
-    /**
-     * This method is an example of the 'subsystem factory' style of command creation. A method inside
-     * the subsytem is created to return an instance of a command. This works for commands that
-     * operate on only that subsystem, a similar approach can be done in RobotContainer for commands
-     * that need to span subsystems. The Subsystem class has helper methods, such as the startEnd
-     * method used here, to create these commands.
-     */
-    /* 
-    public Command getClimberUpCommand() {
-        // The startEnd helper method takes a method to call when the command is
-        // initialized and one to call when it ends
-        return this.startEnd(
-               
-                () -> {
-                    setClimberMotor(kClimberTopPositionRevolutions);
-                },
-                // When the command stops, stop the climber
-                () -> {
-                    stop();
-                });
-    }
-
-    public Command getClimberDownCommand() {
-        // The startEnd helper method takes a method to call when the command is
-        // initialized and one to
-        // call when it ends
-        return this.startEnd(
-                
-                () -> {
-                    setClimberMotor(kClimberBottomPositionRevolutions);
-                },
-                // When the command stops, stop the climber
-                () -> {
-                    stop();
-                });
-    }
-*/
     // An accessor method to set the position of the climber
-    public void setClimberMotor(double position) {
+    public void setClimberPosition(double position) {
         m_climberMotor.setControl(new PositionVoltage(position));
     }
     

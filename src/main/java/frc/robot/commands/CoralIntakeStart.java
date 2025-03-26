@@ -4,11 +4,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.CoralLauncher;
 import frc.robot.subsystems.CoralSensor;
 
-public class Intake extends Command{
+public class CoralIntakeStart extends Command{
 
     private CoralLauncher m_launcher;
 
-    public Intake(CoralLauncher launcher) {
+    public CoralIntakeStart(CoralLauncher launcher) {
         m_launcher = launcher;
         addRequirements(m_launcher);
     }

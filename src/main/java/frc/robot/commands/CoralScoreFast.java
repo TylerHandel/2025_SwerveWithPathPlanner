@@ -4,10 +4,10 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.CoralLauncher;
 
-public class OuttakeSecond extends Command{
+public class CoralScoreFast extends Command{
     private CoralLauncher m_launcher;
     private Timer time = new Timer();
-    public OuttakeSecond(CoralLauncher launcher) {
+    public CoralScoreFast(CoralLauncher launcher) {
         m_launcher = launcher;
         addRequirements(m_launcher);
     }

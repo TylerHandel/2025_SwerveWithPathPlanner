@@ -14,7 +14,7 @@ public class ClimbUp extends Command{
 
     @Override
     public void initialize() {
-        m_Climber.setClimberMotor(Constants.Climber.kClimberTopPositionRevolutions);
+        m_Climber.setClimberPosition(Constants.Climber.kClimberTopPositionRevolutions);
     }
 
     @Override

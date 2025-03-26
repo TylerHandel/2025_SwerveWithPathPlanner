@@ -14,7 +14,7 @@ public class ClimbDown extends Command{
 
     @Override
     public void initialize() {
-        m_Climber.setClimberMotor(Constants.Climber.kClimberBottomPositionRevolutions);
+        m_Climber.setClimberPosition(Constants.Climber.kClimberBottomPositionRevolutions);
     }
 
     @Override
