@@ -26,11 +26,10 @@ public class Throwup extends Command{
 
     @Override
     public void end(boolean interrupted) {
-        m_launcher.setIntakeWheel(0);
-        m_launcher.setOuttakeWheel(0);
+        stop();
     }
 
-    public void stopOuttake() {
+    public void stop() {
         m_launcher.setIntakeWheel(0);
         m_launcher.setOuttakeWheel(0);
     }

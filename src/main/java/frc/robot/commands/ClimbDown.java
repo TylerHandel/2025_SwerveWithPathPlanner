@@ -23,10 +23,10 @@ public class ClimbDown extends Command{
 
     @Override
     public void end(boolean interrupted) {
-        m_Climber.stop();
+        stop();
     }
 
-    public void stopOuttake() {
+    public void stop() {
         m_Climber.stop();
     }
 }
