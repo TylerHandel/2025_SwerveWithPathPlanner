@@ -19,7 +19,7 @@ public class DriveToReefApriltag extends Command{
     
     @Override
     public void initialize() {
-        PathPlannerPath path = m_VisionDriveSystem.getPathToVisionTarget(6);
+        PathPlannerPath path = m_VisionDriveSystem.getPathToVisionTargetOffset(6);
         AutoBuilder.followPath(path);
     }
     @Override
