@@ -27,10 +27,6 @@ public class OuttakeFirst extends Command{
 
     @Override
     public void end(boolean interrupted) {
-        stop();
-    }
-
-    public void stop() {
         m_launcher.setIntakeWheel(0);
         m_launcher.setOuttakeWheel(0);
     }

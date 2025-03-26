@@ -23,10 +23,6 @@ public class ClimbUp extends Command{
 
     @Override
     public void end(boolean interrupted) {
-        stop();
-    }
-
-    public void stop() {
         m_Climber.stop();
     }
 }
