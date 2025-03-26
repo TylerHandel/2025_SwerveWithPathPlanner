@@ -13,6 +13,7 @@ public class PathfindToApriltagOffset extends Command{
     int aprilTagTarget;
 
     private VisionDriveSystem m_VisionDriveSystem;
+    private Command pathCommand;  // Store the path command
     
     public  PathfindToApriltagOffset(VisionDriveSystem driveSystem, int aprilTagTarget) {
         this.aprilTagTarget = aprilTagTarget;
@@ -25,19 +26,24 @@ public class PathfindToApriltagOffset extends Command{
         PathPlannerPath targetPath = m_VisionDriveSystem.getPathToVisionTargetOffset(aprilTagTarget);
         PathConstraints targeConstraints = m_VisionDriveSystem.getConstraintsToVisionTargetOffset(aprilTagTarget);
 
-        AutoBuilder.pathfindThenFollowPath(targetPath, targeConstraints);
+        pathCommand = AutoBuilder.pathfindThenFollowPath(targetPath, targeConstraints);
+        pathCommand.schedule();  // Start the path
     }
     @Override
     public boolean isFinished() {
-        return false;
+        return pathCommand != null && pathCommand.isFinished();
     }
 
     @Override
     public void end(boolean interrupted) {
-        // is there a way to stop the robot?
+        stopFollowPathToApriltag();
     }
 
-    public void stopPathfindToApriltag() {
-        // how to stop a path?
+    public void stopFollowPathToApriltag() {
+        if (pathCommand != null) {
+            pathCommand.cancel();  // Stops the path-following command
+            pathCommand = null;    // Reset the command reference
+        }
+        m_VisionDriveSystem.stop();  // Stop the drivetrain motors
     }
 }
