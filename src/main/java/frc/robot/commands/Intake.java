@@ -29,9 +29,4 @@ public class Intake extends Command{
         m_launcher.setIntakeWheel(0);
         m_launcher.setOuttakeWheel(0);
     }
-
-    public void stopIntake() {
-        m_launcher.setIntakeWheel(0);
-        m_launcher.setOuttakeWheel(0);
-    }
 }

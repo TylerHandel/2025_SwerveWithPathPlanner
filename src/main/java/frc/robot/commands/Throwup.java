@@ -6,7 +6,6 @@ import frc.robot.subsystems.CoralLauncher;
 
 public class Throwup extends Command{
     private CoralLauncher m_launcher;
-    private Timer time = new Timer();
     public Throwup(CoralLauncher launcher) {
         m_launcher = launcher;
         addRequirements(m_launcher);
@@ -16,21 +15,10 @@ public class Throwup extends Command{
     public void initialize() {
         m_launcher.setIntakeWheel(-1);
         m_launcher.setOuttakeWheel(-1);
-        time.reset();
-        time.start();
-    }
-    @Override
-    public boolean isFinished() {
-        return time.get() > 2;
     }
 
     @Override
     public void end(boolean interrupted) {
-        m_launcher.setIntakeWheel(0);
-        m_launcher.setOuttakeWheel(0);
-    }
-
-    public void stopOuttake() {
         m_launcher.setIntakeWheel(0);
         m_launcher.setOuttakeWheel(0);
     }

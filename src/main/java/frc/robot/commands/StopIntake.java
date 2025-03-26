@@ -1,33 +1,13 @@
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.subsystems.CoralLauncher;
 
-public class StopIntake extends Command{
-    private CoralLauncher m_launcher;
+public class StopIntake extends InstantCommand {
     public StopIntake(CoralLauncher launcher) {
-        m_launcher = launcher;
-        addRequirements(m_launcher);
-    }
-
-    @Override
-    public void initialize() {
-        m_launcher.setIntakeWheel(0);
-        m_launcher.setOuttakeWheel(0);
-    }
-    @Override
-    public boolean isFinished() {
-        return true;
-    }
-
-    @Override
-    public void end(boolean interrupted) {
-        m_launcher.setIntakeWheel(0);
-        m_launcher.setOuttakeWheel(0);
-    }
-
-    public void stopIntake() {
-        m_launcher.setIntakeWheel(0);
-        m_launcher.setOuttakeWheel(0);
+        super(() -> {
+            launcher.setIntakeWheel(0);
+            launcher.setOuttakeWheel(0);
+        }, launcher);
     }
 }

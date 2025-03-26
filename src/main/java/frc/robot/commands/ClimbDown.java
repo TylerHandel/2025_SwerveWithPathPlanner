@@ -25,8 +25,4 @@ public class ClimbDown extends Command{
     public void end(boolean interrupted) {
         m_Climber.stop();
     }
-
-    public void stopOuttake() {
-        m_Climber.stop();
-    }
 }

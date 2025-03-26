@@ -133,7 +133,7 @@ public class RobotContainer {
         //joystick.x().onTrue(new Outtake(m_launcher));
         joystick.a().onTrue(new OuttakeSecond(m_launcher));
         joystick.x().onTrue(new OuttakeFirst(m_launcher));
-        joystick.povLeft().whileTrue(new Throwup(m_launcher));
+        joystick.povLeft().whileTrue(new Throwup(m_launcher).withTimeout(2));
         joystick.rightBumper().onTrue(new StopIntake(m_launcher));
         joystick.povDown().whileTrue(new ClimbDown(m_climber));
         joystick.povUp().whileTrue(new ClimbUp(m_climber));

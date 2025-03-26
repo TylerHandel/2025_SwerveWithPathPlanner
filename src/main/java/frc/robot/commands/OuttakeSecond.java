@@ -29,9 +29,4 @@ public class OuttakeSecond extends Command{
         m_launcher.setIntakeWheel(0);
         m_launcher.setOuttakeWheel(0);
     }
-
-    public void stopOuttake() {
-        m_launcher.setIntakeWheel(0);
-        m_launcher.setOuttakeWheel(0);
-    }
 }
