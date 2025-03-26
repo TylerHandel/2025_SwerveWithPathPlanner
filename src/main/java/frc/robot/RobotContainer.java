@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
-import frc.robot.commands.DriveToReefApriltag;
+import frc.robot.commands.DriveToApriltag;
 import frc.robot.commands.Intake;
 import frc.robot.commands.OuttakeFirst;
 import frc.robot.commands.OuttakeSecond;
@@ -76,7 +76,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("OuttakeFirst", new OuttakeFirst(m_launcher));
         NamedCommands.registerCommand("OuttakeSecond", new OuttakeSecond(m_launcher));
         NamedCommands.registerCommand("StopIntake", new StopIntake(m_launcher));
-        NamedCommands.registerCommand("DriveToReefApriltag", new DriveToReefApriltag(m_VisionDriveSystem, m_aprilTagTarget));
+        NamedCommands.registerCommand("DriveToApriltag", new DriveToApriltag(m_VisionDriveSystem, m_aprilTagTarget));
 
         autoChooser = AutoBuilder.buildAutoChooser("Tests");
         SmartDashboard.putData("Auto Mode", autoChooser);
@@ -119,7 +119,7 @@ public class RobotContainer {
         */
 
         // When pressing the B key, drive to reef apriltag 6 - need to generalize this later
-        joystick.b().onTrue(new DriveToReefApriltag(m_VisionDriveSystem, m_aprilTagTarget));
+        joystick.b().whileTrue(new DriveToApriltag(m_VisionDriveSystem, m_aprilTagTarget));
 
         //joystick.pov(0).whileTrue(drivetrain.applyRequest(() ->
         //    forwardStraight.withVelocityX(0.5).withVelocityY(0))

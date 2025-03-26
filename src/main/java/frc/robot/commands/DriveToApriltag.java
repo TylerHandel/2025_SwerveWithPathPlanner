@@ -10,20 +10,21 @@ import frc.robot.Constants;
 import frc.robot.subsystems.VisionDriveSystem;
 
 
-public class DriveToReefApriltag extends Command{
+public class DriveToApriltag extends Command{
     
-    int m_targetAprilTag;
+    int aprilTagTarget;
 
     private VisionDriveSystem m_VisionDriveSystem;
-    public DriveToReefApriltag(VisionDriveSystem driveSystem, int aprilTagTarget) {
-        m_targetAprilTag = aprilTagTarget;
+    
+    public DriveToApriltag(VisionDriveSystem driveSystem, int aprilTagTarget) {
+        this.aprilTagTarget = aprilTagTarget;
         m_VisionDriveSystem = driveSystem;
         addRequirements(m_VisionDriveSystem);
     }
     
     @Override
     public void initialize() {
-        PathPlannerPath path = m_VisionDriveSystem.getPathToVisionTarget(m_targetAprilTag);
+        PathPlannerPath path = m_VisionDriveSystem.getPathToVisionTarget(aprilTagTarget);
         AutoBuilder.followPath(path);
     }
     @Override
@@ -33,8 +34,10 @@ public class DriveToReefApriltag extends Command{
 
     @Override
     public void end(boolean interrupted) {
-        
+        // is there a way to stop the robot?
     }
 
-  
+    public void stopDriveToApriltag() {
+        // how to stop a path?
+    }
 }

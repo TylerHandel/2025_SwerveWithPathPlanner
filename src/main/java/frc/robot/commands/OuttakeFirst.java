@@ -7,8 +7,8 @@ import frc.robot.subsystems.CoralLauncher;
 public class OuttakeFirst extends Command{
     private CoralLauncher m_launcher;
     private Timer time = new Timer();
+    
     public OuttakeFirst(CoralLauncher launcher) {
-        
         m_launcher = launcher;
         addRequirements(m_launcher);
     }

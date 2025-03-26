@@ -30,8 +30,8 @@ public class VisionDriveSystem implements Subsystem {
     // An accessor method to set the AprilTag target
     public PathPlannerPath getPathToVisionTarget(int aprilTagTarget) {
     
-        double m_AprilTagTargetData[] = Constants.Vision.kAprilTagLocations[aprilTagTarget];
-        final double InchestoMeters = 0.0254;
+        //double m_AprilTagTargetData[] = Constants.Vision.kAprilTagLocations[aprilTagTarget];
+        //final double InchestoMeters = 0.0254;
 
         // Get the pose of the AprilTag
         Optional<Pose3d> targetPose3d = FieldConstants.getTagPose(aprilTagTarget); // Get the pose of the AprilTag
@@ -41,11 +41,16 @@ public class VisionDriveSystem implements Subsystem {
         double targetY = m_AprilTagTargetData[1] * InchestoMeters;   // Y coordinate in inches
         double targetRot = m_AprilTagTargetData[3]; // Z rotaton in degrees
         */
-        
+
+        // Get the pose of the AprilTag - need to caluclate the offset from the center of the robot
+        double targetX = targetPose3d.get().getX();   // X coordinate in meters
+        double targetY = targetPose3d.get().getY();   // Y coordinate in meters
+        Rotation2d targetRot = targetPose3d.get().getRotation().toRotation2d();
+
         // Create a list of waypoints from poses. Each pose represents one waypoint.
         // The rotation component of the pose should be the direction of travel. Do not use holonomic rotation.
         List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses(
-            new Pose2d(targetPose3d.get().getX(), targetPose3d.get().getY(), targetPose3d.get().getRotation().toRotation2d())
+            new Pose2d(targetX, targetY, targetRot)
         );
         // can have more than one waypoint
         //    new Pose2d(3.0, 1.0, Rotation2d.fromDegrees(0)),
@@ -61,7 +66,7 @@ public class VisionDriveSystem implements Subsystem {
             waypoints,
             constraints,
             null, // The ideal starting state, this is only relevant for pre-planned paths, so can be null for on-the-fly paths.
-            new GoalEndState(0.0, Rotation2d.fromDegrees(-90)) // Goal end state. You can set a holonomic rotation here. If using a differential drivetrain, the rotation will have no effect.
+            new GoalEndState(0.0, Rotation2d.fromDegrees(targetRot.getDegrees())) // Goal end state. You can set a holonomic rotation here. If using a differential drivetrain, the rotation will have no effect.
         );
 
         // Prevent the path from being flipped if the coordinates are already correct  
