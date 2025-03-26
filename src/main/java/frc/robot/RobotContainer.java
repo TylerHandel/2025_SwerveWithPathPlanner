@@ -6,6 +6,7 @@ package frc.robot;
 
 import static edu.wpi.first.units.Units.*;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
+//import com.apple.laf.AquaButtonBorder.Named;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -20,7 +21,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
-import frc.robot.commands.DriveToReefApriltag;
+import frc.robot.commands.FollowPathToApriltag;
+import frc.robot.commands.PathfindToApriltagOffset;
 import frc.robot.commands.CoralIntakeStart;
 import frc.robot.commands.CoralScoreSlow;
 import frc.robot.commands.CoralScoreFast;
@@ -32,6 +34,7 @@ import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.CoralLauncher;
 import frc.robot.subsystems.VisionDriveSystem;
 import frc.robot.subsystems.CANdleSystem;
+
 
 public class RobotContainer {
     private double MaxSpeed = TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
@@ -72,17 +75,14 @@ public class RobotContainer {
     private final SendableChooser<Command> autoChooser;
 
     public RobotContainer() {
-        NamedCommands.registerCommand("Intake", new Intake(m_launcher));
-        NamedCommands.registerCommand("OuttakeFirst", new OuttakeFirst(m_launcher));
-        NamedCommands.registerCommand("OuttakeSecond", new OuttakeSecond(m_launcher));
-        NamedCommands.registerCommand("StopIntake", new StopIntake(m_launcher));
+        NamedCommands.registerCommand("ClimbDown", new ClimbDown(m_climber));
+        NamedCommands.registerCommand("ClimbUp", new ClimbUp(m_climber));
+        NamedCommands.registerCommand("CoralIntakeStart", new CoralIntakeStart(m_launcher));
+        NamedCommands.registerCommand("CoralIntakeStop", new CoralIntakeStop(m_launcher));
+        NamedCommands.registerCommand("CoralScoreFast", new CoralScoreFast(m_launcher));
+        NamedCommands.registerCommand("CoralScoreSlow", new CoralScoreSlow(m_launcher));
         NamedCommands.registerCommand("FollowPathToApriltag", new FollowPathToApriltag(m_VisionDriveSystem, m_aprilTagTarget));
         NamedCommands.registerCommand("PathfindToApriltagOffset", new PathfindToApriltagOffset(m_VisionDriveSystem, m_aprilTagTarget));
-        NamedCommands.registerCommand("CoralIntakeStart", new CoralIntakeStart(m_launcher));
-        NamedCommands.registerCommand("CoralScoreSlow", new CoralScoreSlow(m_launcher));
-        NamedCommands.registerCommand("CoralScoreFast", new CoralScoreFast(m_launcher));
-        NamedCommands.registerCommand("CoralIntakeStop", new CoralIntakeStop(m_launcher));
-        NamedCommands.registerCommand("DriveToReefApriltag", new DriveToReefApriltag(m_VisionDriveSystem));
 
         autoChooser = AutoBuilder.buildAutoChooser("Tests");
         SmartDashboard.putData("Auto Mode", autoChooser);

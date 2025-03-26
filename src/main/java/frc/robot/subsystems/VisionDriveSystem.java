@@ -91,13 +91,13 @@ public class VisionDriveSystem implements Subsystem {
         Rotation2d targetRot = targetPose3d.get().getRotation().toRotation2d(); // Z rotation in radians
 
         // Translate the target from the center of the tag to the center of the robot + 1 meter back
-        double translatedTargetX = targetX + (Constants.Vision.kLengthOfRobot+offsetDistance)*InchestoMeters*Math.cos(targetRot.getDegrees());
-        double translatedTargetY = targetY + (Constants.Vision.kLengthOfRobot+offsetDistance)*InchestoMeters*Math.sin(targetRot.getDegrees());
+        double translatedTargetOffsetX = targetX + (Constants.Vision.kLengthOfRobot+offsetDistance)*InchestoMeters*Math.cos(targetRot.getDegrees());
+        double translatedTargetOffsetY = targetY + (Constants.Vision.kLengthOfRobot+offsetDistance)*InchestoMeters*Math.sin(targetRot.getDegrees());
         
          // Create a list of waypoints from poses. Each pose represents one waypoint.
         // The rotation component of the pose should be the direction of travel. Do not use holonomic rotation.
         List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses(
-            new Pose2d(translatedTargetX, translatedTargetY, targetRot)
+            new Pose2d(translatedTargetOffsetX, translatedTargetOffsetY, targetRot)
         );
         // can have more than one waypoint
         //    new Pose2d(3.0, 1.0, Rotation2d.fromDegrees(0)),
