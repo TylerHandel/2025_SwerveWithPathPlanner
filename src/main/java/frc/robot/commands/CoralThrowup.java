@@ -3,9 +3,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.CoralLauncher;
 
-public class Throwup extends Command{
+public class CoralThrowup extends Command{
     private CoralLauncher m_launcher;
-    public Throwup(CoralLauncher launcher) {
+    public CoralThrowup(CoralLauncher launcher) {
         m_launcher = launcher;
         addRequirements(m_launcher);
     }

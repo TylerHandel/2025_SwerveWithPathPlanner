@@ -27,7 +27,7 @@ import frc.robot.commands.CoralIntakeStart;
 import frc.robot.commands.CoralScoreSlow;
 import frc.robot.commands.CoralScoreFast;
 import frc.robot.commands.CoralIntakeStop;
-import frc.robot.commands.Throwup;
+import frc.robot.commands.CoralThrowup;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -81,6 +81,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("CoralIntakeStop", new CoralIntakeStop(m_launcher));
         NamedCommands.registerCommand("CoralScoreFast", new CoralScoreFast(m_launcher));
         NamedCommands.registerCommand("CoralScoreSlow", new CoralScoreSlow(m_launcher));
+        NamedCommands.registerCommand("CoralThrowup", new CoralThrowup(m_launcher));
         NamedCommands.registerCommand("FollowPathToApriltag", new FollowPathToApriltag(m_VisionDriveSystem, m_aprilTagTarget));
         NamedCommands.registerCommand("PathfindToApriltagOffset", new PathfindToApriltagOffset(m_VisionDriveSystem, m_aprilTagTarget));
 
@@ -124,9 +125,6 @@ public class RobotContainer {
             .withRotationalRate((-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[4]*0.1))));  
         */
 
-        // When pressing the B key, drive to reef apriltag 6 - need to generalize this later
-        joystick.b().whileTrue(new FollowPathToApriltag(m_VisionDriveSystem, m_aprilTagTarget));
-
         //joystick.pov(0).whileTrue(drivetrain.applyRequest(() ->
         //    forwardStraight.withVelocityX(0.5).withVelocityY(0))
         //);
@@ -144,14 +142,21 @@ public class RobotContainer {
         // reset the field-centric heading on left bumper press
         joystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
         
-        joystick.y().onTrue(new CoralIntakeStart(m_launcher));
-        //joystick.x().onTrue(new Outtake(m_launcher));
-        joystick.a().onTrue(new CoralScoreFast(m_launcher));
-        joystick.x().onTrue(new CoralScoreSlow(m_launcher));
-        joystick.povLeft().whileTrue(new Throwup(m_launcher).withTimeout(2));
-        joystick.rightBumper().onTrue(new CoralIntakeStop(m_launcher));
         joystick.povDown().whileTrue(new ClimbDown(m_climber));
         joystick.povUp().whileTrue(new ClimbUp(m_climber));
+
+        joystick.y().onTrue(new CoralIntakeStart(m_launcher));
+        joystick.rightBumper().onTrue(new CoralIntakeStop(m_launcher));
+        //joystick.x().onTrue(new Outtake(m_launcher));
+        
+        joystick.a().onTrue(new CoralScoreFast(m_launcher));
+        joystick.x().onTrue(new CoralScoreSlow(m_launcher));
+        
+        joystick.povLeft().whileTrue(new CoralThrowup(m_launcher).withTimeout(2));
+
+         // Drive to reef apriltag 6 - need to generalize this later
+         joystick.b().whileTrue(new FollowPathToApriltag(m_VisionDriveSystem, m_aprilTagTarget));
+
         drivetrain.registerTelemetry(logger::telemeterize);
         
     }
