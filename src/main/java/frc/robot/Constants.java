@@ -23,6 +23,7 @@ public final class Constants {
     }
     public static class Vision {
         public static final boolean kUseLimelight = true;
+        public static final double kLengthOfRobot = 36.0; // Length of the robot from front to back in inches, used for path planning 
         public static final String kLimelightFront = "limelight-front";
         public static final String kLimelightBack = "limelight-back";
         public static final String[] kLimelightNames = {

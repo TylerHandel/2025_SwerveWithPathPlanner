@@ -16,6 +16,7 @@ import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Subsystem;
+import java.lang.Math;
 import frc.robot.Constants;
 import frc.robot.FieldConstants;
 
@@ -31,7 +32,7 @@ public class VisionDriveSystem implements Subsystem {
     public PathPlannerPath getPathToVisionTarget(int aprilTagTarget) {
     
         //double m_AprilTagTargetData[] = Constants.Vision.kAprilTagLocations[aprilTagTarget];
-        //final double InchestoMeters = 0.0254;
+        final double InchestoMeters = 0.0254;
 
         // Get the pose of the AprilTag
         Optional<Pose3d> targetPose3d = FieldConstants.getTagPose(aprilTagTarget); // Get the pose of the AprilTag
@@ -45,12 +46,16 @@ public class VisionDriveSystem implements Subsystem {
         // Get the pose of the AprilTag - need to caluclate the offset from the center of the robot
         double targetX = targetPose3d.get().getX();   // X coordinate in meters
         double targetY = targetPose3d.get().getY();   // Y coordinate in meters
-        Rotation2d targetRot = targetPose3d.get().getRotation().toRotation2d();
+        Rotation2d targetRot = targetPose3d.get().getRotation().toRotation2d(); // Z rotation in radians
 
+        // Translate the target from the center of the tag to the center of the robot
+        double translatedTargetX = targetX + Constants.Vision.kLengthOfRobot*InchestoMeters*Math.cos(targetRot.getDegrees());
+        double translatedTargetY = targetY + Constants.Vision.kLengthOfRobot*InchestoMeters*Math.sin(targetRot.getDegrees());
+        
         // Create a list of waypoints from poses. Each pose represents one waypoint.
         // The rotation component of the pose should be the direction of travel. Do not use holonomic rotation.
         List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses(
-            new Pose2d(targetX, targetY, targetRot)
+            new Pose2d(translatedTargetX, translatedTargetY, targetRot)
         );
         // can have more than one waypoint
         //    new Pose2d(3.0, 1.0, Rotation2d.fromDegrees(0)),
