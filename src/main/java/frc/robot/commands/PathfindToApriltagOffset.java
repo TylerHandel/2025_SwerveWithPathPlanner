@@ -36,10 +36,10 @@ public class PathfindToApriltagOffset extends Command{
 
     @Override
     public void end(boolean interrupted) {
-        stopFollowPathToApriltag();
+        stop();
     }
 
-    public void stopFollowPathToApriltag() {
+    public void stop() {
         if (pathCommand != null) {
             pathCommand.cancel();  // Stops the path-following command
             pathCommand = null;    // Reset the command reference
