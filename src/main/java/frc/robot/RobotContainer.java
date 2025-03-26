@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
@@ -55,6 +56,10 @@ public class RobotContainer {
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage);
     */
     
+    //* Used for looking up AprilTag poses for pathfinding */
+    FieldConstants constants = new FieldConstants();
+    int m_aprilTagTarget = 6; // default to 6 for now (for testing)
+
     private final Telemetry logger = new Telemetry(MaxSpeed);
     private final CommandXboxController joystick = new CommandXboxController(Constants.Controllers.kJoystickId);
     public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
@@ -71,7 +76,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("OuttakeFirst", new OuttakeFirst(m_launcher));
         NamedCommands.registerCommand("OuttakeSecond", new OuttakeSecond(m_launcher));
         NamedCommands.registerCommand("StopIntake", new StopIntake(m_launcher));
-        NamedCommands.registerCommand("DriveToReefApriltag", new DriveToReefApriltag(m_VisionDriveSystem));
+        NamedCommands.registerCommand("DriveToReefApriltag", new DriveToReefApriltag(m_VisionDriveSystem, m_aprilTagTarget));
 
         autoChooser = AutoBuilder.buildAutoChooser("Tests");
         SmartDashboard.putData("Auto Mode", autoChooser);
@@ -106,12 +111,16 @@ public class RobotContainer {
         // When hoilding down POV right directional key, apply brake
         joystick.povRight().whileTrue(drivetrain.applyRequest(() -> brake));
 
-        // When holding down B key, drive toward the nearest AprilTag
+        /*  When holding down B key, drive toward the nearest AprilTag
         joystick.b().whileTrue(drivetrain.applyRequest(() -> 
             driveRobotCentric.withVelocityY(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[0]*5)
             .withVelocityX(LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[2]*1)
             .withRotationalRate((-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[4]*0.1))));  
-        
+        */
+
+        // When pressing the B key, drive to reef apriltag 6 - need to generalize this later
+        joystick.b().onTrue(new DriveToReefApriltag(m_VisionDriveSystem, m_aprilTagTarget));
+
         //joystick.pov(0).whileTrue(drivetrain.applyRequest(() ->
         //    forwardStraight.withVelocityX(0.5).withVelocityY(0))
         //);
@@ -139,8 +148,6 @@ public class RobotContainer {
         joystick.povUp().whileTrue(new ClimbUp(m_climber));
         drivetrain.registerTelemetry(logger::telemeterize);
         
-        // Drive to reef apriltag when holding back and X
-        joystick.back().and(joystick.x().onTrue(new DriveToReefApriltag(m_VisionDriveSystem)));
     }
 
     public void configureCanandColor() {

@@ -23,9 +23,7 @@ public class Robot extends TimedRobot {
 
   public Robot() {
     m_robotContainer = new RobotContainer();
-    FieldConstants constants = new FieldConstants();
-    System.out.println("Tag pose: ");
-    System.out.println(constants.getTagPose(6));
+    
   }
 
   @Override

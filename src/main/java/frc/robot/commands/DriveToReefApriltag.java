@@ -12,15 +12,18 @@ import frc.robot.subsystems.VisionDriveSystem;
 
 public class DriveToReefApriltag extends Command{
     
+    int m_targetAprilTag;
+
     private VisionDriveSystem m_VisionDriveSystem;
-    public DriveToReefApriltag(VisionDriveSystem driveSystem) {
+    public DriveToReefApriltag(VisionDriveSystem driveSystem, int aprilTagTarget) {
+        m_targetAprilTag = aprilTagTarget;
         m_VisionDriveSystem = driveSystem;
         addRequirements(m_VisionDriveSystem);
     }
     
     @Override
     public void initialize() {
-        PathPlannerPath path = m_VisionDriveSystem.getPathToVisionTarget(6);
+        PathPlannerPath path = m_VisionDriveSystem.getPathToVisionTarget(m_targetAprilTag);
         AutoBuilder.followPath(path);
     }
     @Override

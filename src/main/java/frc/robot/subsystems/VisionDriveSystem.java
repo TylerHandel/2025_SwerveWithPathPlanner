@@ -32,6 +32,8 @@ public class VisionDriveSystem implements Subsystem {
     
         double m_AprilTagTargetData[] = Constants.Vision.kAprilTagLocations[aprilTagTarget];
         final double InchestoMeters = 0.0254;
+
+        // Get the pose of the AprilTag
         Optional<Pose3d> targetPose3d = FieldConstants.getTagPose(aprilTagTarget); // Get the pose of the AprilTag
         
         /* Old code to look up apriltag pose info
@@ -43,16 +45,17 @@ public class VisionDriveSystem implements Subsystem {
         // Create a list of waypoints from poses. Each pose represents one waypoint.
         // The rotation component of the pose should be the direction of travel. Do not use holonomic rotation.
         List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses(
-         //   new Pose3d(targetPose3d.get().getX(), targetPose3d.get().getY(), targetPose3d.get().getRotation())
             new Pose2d(targetPose3d.get().getX(), targetPose3d.get().getY(), targetPose3d.get().getRotation().toRotation2d())
-          // old code  new Pose2d(targetX, targetY, Rotation2d.fromDegrees(targetRot)) //,
+        );
+        // can have more than one waypoint
         //    new Pose2d(3.0, 1.0, Rotation2d.fromDegrees(0)),
         //    new Pose2d(5.0, 3.0, Rotation2d.fromDegrees(90))
-        );
 
-        PathConstraints constraints = new PathConstraints(3.0, 3.0, 2 * Math.PI, 4 * Math.PI); // The constraints for this path.
-        // PathConstraints constraints = PathConstraints.unlimitedConstraints(12.0); // You can also use unlimited constraints, only limited by motor torque and nominal battery voltage
-
+        // The constraints for this path.
+        PathConstraints constraints = new PathConstraints(3.0, 3.0, 2 * Math.PI, 4 * Math.PI); 
+        // You can also use unlimited constraints, only limited by motor torque and nominal battery voltage
+        // PathConstraints constraints = PathConstraints.unlimitedConstraints(12.0); 
+        
         // Create the path using the waypoints created above
         PathPlannerPath path = new PathPlannerPath(
             waypoints,

@@ -22,9 +22,8 @@ public class FieldConstants {
             double x = pose.getX(); // X coordinate in meters
             double y = pose.getY(); // Y coordinate in meters
             double zRotationDegrees = Math.toDegrees(pose.getRotation().getZ());
-            System.out.println("Rotation degrees: " + zRotationDegrees);
-
-            System.out.println("Tag ID " + tagID + " - X: " + x + ", Y: " + y);
+            System.out.println("Target Tag ID " + tagID + ": - X: " + x + ", Y: " + y);
+            System.out.println("Target Rotation degrees: " + zRotationDegrees);
         } else {
             System.out.println("Tag ID " + tagID + " not found.");
         }
