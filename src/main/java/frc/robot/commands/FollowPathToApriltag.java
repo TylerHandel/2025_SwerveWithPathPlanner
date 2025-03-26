@@ -14,6 +14,7 @@ public class FollowPathToApriltag extends Command{
     int aprilTagTarget;
 
     private VisionDriveSystem m_VisionDriveSystem;
+    private Command pathCommand;  // Store the path command
     
     public FollowPathToApriltag(VisionDriveSystem driveSystem, int aprilTagTarget) {
         this.aprilTagTarget = aprilTagTarget;
@@ -24,19 +25,27 @@ public class FollowPathToApriltag extends Command{
     @Override
     public void initialize() {
         PathPlannerPath path = m_VisionDriveSystem.getPathToVisionTarget(aprilTagTarget);
-        AutoBuilder.followPath(path);
+        pathCommand = AutoBuilder.followPath(path);
+        pathCommand.schedule();  // Start the path
     }
     @Override
     public boolean isFinished() {
-        return false;
+        return pathCommand != null && pathCommand.isFinished();
     }
 
     @Override
     public void end(boolean interrupted) {
-        // is there a way to stop the robot?
+        if (pathCommand != null) {
+            pathCommand.cancel();  // Ensure the path stops
+            pathCommand = null;    // Reset the command reference
+        }
+        m_VisionDriveSystem.stop();  // Stop the drivetrain when command ends
     }
 
     public void stopFollowPathToApriltag() {
-        // how to stop a path?
+        if (pathCommand != null) {
+            pathCommand.cancel();  // Stops the path-following command
+            pathCommand = null;    // Reset the command reference
+        }
     }
 }
