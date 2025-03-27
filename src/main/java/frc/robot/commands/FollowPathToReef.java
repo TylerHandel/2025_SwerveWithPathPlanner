@@ -9,14 +9,14 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.VisionDriveSystem;
 
 
-public class FollowPathToApriltag extends Command{
+public class FollowPathToReef extends Command{
     
     int aprilTagTarget;
 
     private VisionDriveSystem m_VisionDriveSystem;
     private Command pathCommand;  // Store the path command
     
-    public FollowPathToApriltag(VisionDriveSystem driveSystem, int aprilTagTarget) {
+    public FollowPathToReef(VisionDriveSystem driveSystem, int aprilTagTarget) {
         this.aprilTagTarget = aprilTagTarget;
         m_VisionDriveSystem = driveSystem;
         addRequirements(m_VisionDriveSystem);

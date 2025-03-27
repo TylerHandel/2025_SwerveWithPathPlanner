@@ -6,7 +6,6 @@ package frc.robot;
 
 import static edu.wpi.first.units.Units.*;
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
-//import com.apple.laf.AquaButtonBorder.Named;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
 import com.pathplanner.lib.auto.AutoBuilder;
@@ -17,17 +16,17 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
-import frc.robot.commands.FollowPathToApriltag;
+import frc.robot.commands.FollowPathToReef;
 import frc.robot.commands.PathfindToApriltagOffset;
 import frc.robot.commands.CoralIntakeStart;
 import frc.robot.commands.CoralScoreSlow;
 import frc.robot.commands.CoralScoreFast;
 import frc.robot.commands.CoralIntakeStop;
 import frc.robot.commands.CoralThrowup;
+import frc.robot.commands.DriveToNearestApriltag;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -82,8 +81,9 @@ public class RobotContainer {
         NamedCommands.registerCommand("CoralScoreFast", new CoralScoreFast(m_launcher));
         NamedCommands.registerCommand("CoralScoreSlow", new CoralScoreSlow(m_launcher));
         NamedCommands.registerCommand("CoralThrowup", new CoralThrowup(m_launcher));
-        NamedCommands.registerCommand("FollowPathToApriltag", new FollowPathToApriltag(m_VisionDriveSystem, m_aprilTagTarget));
+        NamedCommands.registerCommand("FollowPathToReef", new FollowPathToReef(m_VisionDriveSystem, m_aprilTagTarget));
         NamedCommands.registerCommand("PathfindToApriltagOffset", new PathfindToApriltagOffset(m_VisionDriveSystem, m_aprilTagTarget));
+        NamedCommands.registerCommand("DriveToNearestApriltag", new DriveToNearestApriltag(drivetrain));
 
         autoChooser = AutoBuilder.buildAutoChooser("Tests");
         SmartDashboard.putData("Auto Mode", autoChooser);
@@ -154,8 +154,9 @@ public class RobotContainer {
         
         joystick.povLeft().whileTrue(new CoralThrowup(m_launcher).withTimeout(2));
 
-         // Drive to reef apriltag 6 - need to generalize this later
-         joystick.b().whileTrue(new FollowPathToApriltag(m_VisionDriveSystem, m_aprilTagTarget));
+        // Drive to reef apriltag 6 - need to generalize this later
+      //  joystick.b().whileTrue(new FollowPathToReef(m_VisionDriveSystem, m_aprilTagTarget));
+        joystick.b().whileTrue(new DriveToNearestApriltag(drivetrain));
 
         drivetrain.registerTelemetry(logger::telemeterize);
         
