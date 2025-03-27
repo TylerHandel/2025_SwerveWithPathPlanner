@@ -29,4 +29,9 @@ public class FieldConstants {
         }
         return tagPose;
     }
+
+    public static boolean fieldElementIsBlueAlliance(int apriltagID) {
+        return apriltagID > 11 && apriltagID < 23;
+    }
+
 }
