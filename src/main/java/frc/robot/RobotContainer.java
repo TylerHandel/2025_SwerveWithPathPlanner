@@ -59,7 +59,6 @@ public class RobotContainer {
     */
     
     //* Used for looking up AprilTag poses for pathfinding */
-    FieldConstants constants = new FieldConstants();
     int m_aprilTagTarget = 6; // default to 6 for now (for testing)
 
     private final Telemetry logger = new Telemetry(MaxSpeed);

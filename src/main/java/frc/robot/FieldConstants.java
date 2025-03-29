@@ -10,7 +10,12 @@ import edu.wpi.first.math.geometry.Pose3d;
  * Contains various field dimensions and useful reference points. All units are
  * in meters and poses are defined to have a blue alliance origin.
  */
-public class FieldConstants {
+public final class FieldConstants {
+    // Prevent instantiation
+    private FieldConstants() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+    }
+
     private static AprilTagFieldLayout fieldLayout  = AprilTagFieldLayout.loadField(AprilTagFields.k2025ReefscapeWelded);
 
     // Example method to get the pose of a specific AprilTag by its ID
