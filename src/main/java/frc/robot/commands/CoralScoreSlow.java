@@ -6,9 +6,9 @@ import frc.robot.subsystems.CoralLauncher;
 
 public class CoralScoreSlow extends Command{
     private CoralLauncher m_launcher;
-    private Timer time = new Timer();
+    private Timer timer = new Timer();
+
     public CoralScoreSlow(CoralLauncher launcher) {
-        
         m_launcher = launcher;
         addRequirements(m_launcher);
     }
@@ -17,16 +17,17 @@ public class CoralScoreSlow extends Command{
     public void initialize() {
         m_launcher.setIntakeWheel(0.4);
         m_launcher.setOuttakeWheel(0.2);
-        time.reset();
-        time.start();
+        timer.reset();
+        timer.start();
     }
     @Override
     public boolean isFinished() {
-        return time.get() > 1;
+        return timer.get() > 1;
     }
 
     @Override
     public void end(boolean interrupted) {
+        timer.stop();
         m_launcher.setIntakeWheel(0);
         m_launcher.setOuttakeWheel(0);
     }
