@@ -8,11 +8,14 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 import edu.wpi.first.math.VecBuilder;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -20,10 +23,11 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private final RobotContainer m_robotContainer;
+  private final Field2d m_field = new Field2d();
 
   public Robot() {
     m_robotContainer = new RobotContainer();
-    
+    SmartDashboard.putData("Field", m_field);
   }
 
   @Override
@@ -78,10 +82,20 @@ public class Robot extends TimedRobot {
           System.out.println("LL " + m_limelightName + " Update: " + m_robotContainer.drivetrain.getState().Pose);
         }
       }
-      
-      
-    }
 
+      // This was the code that was added during the merge with Alex's code
+      Pose2d currentPose = getCurrentPose();
+      m_field.setRobotPose(currentPose);
+    }
+  }
+
+  /**
+   * Retrieves the current pose of the robot from the drivetrain.
+   * 
+   * @return The current Pose2d of the robot.
+   */
+  public Pose2d getCurrentPose() {
+    return m_robotContainer.drivetrain.getState().Pose;
   }
 
   @Override
