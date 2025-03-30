@@ -86,6 +86,10 @@ public class RobotContainer {
         configureCanandColor();
     }
 
+    public void configureAutonomousRoutines() {
+      drivetrain.configureAutoBuilder();
+    }
+
     /* Modulate speed of swerve drive based on joystick input */
     private double velocityCurveTranslate(double joystickInput) { 
         if(joystickInput > 0){

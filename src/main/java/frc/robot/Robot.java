@@ -24,6 +24,7 @@ public class Robot extends TimedRobot {
 
   private final RobotContainer m_robotContainer;
   private final Field2d m_field = new Field2d();
+  private Alliance lastAllianceReport = null;
 
   public Robot() {
     m_robotContainer = new RobotContainer();
@@ -102,7 +103,12 @@ public class Robot extends TimedRobot {
   public void disabledInit() {}
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    if (DriverStation.getAlliance().isPresent() && lastAllianceReport != DriverStation.getAlliance().get()) {
+      m_robotContainer.configureAutonomousRoutines();
+      lastAllianceReport = DriverStation.getAlliance().get();
+    }
+  }
 
   @Override
   public void disabledExit() {}
@@ -148,4 +154,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void simulationPeriodic() {}
+
+  @Override
+  public void driverStationConnected() {
+    // This is called when the Driver Station is connected to the robot
+    m_robotContainer.configureAutonomousRoutines();
+  }
 }
