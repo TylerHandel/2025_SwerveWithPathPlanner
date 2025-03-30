@@ -13,7 +13,7 @@
         {
           "type": "named",
           "data": {
-            "name": "OuttakeFirst"
+            "name": "CoralScoreSlow"
           }
         },
         {
@@ -31,7 +31,7 @@
         {
           "type": "named",
           "data": {
-            "name": "Intake"
+            "name": "CoralIntakeStart"
           }
         },
         {
@@ -43,7 +43,7 @@
         {
           "type": "named",
           "data": {
-            "name": "OuttakeFirst"
+            "name": "CoralScoreSlow"
           }
         },
         {
@@ -61,7 +61,7 @@
         {
           "type": "named",
           "data": {
-            "name": "Intake"
+            "name": "CoralIntakeStart"
           }
         },
         {
@@ -73,7 +73,7 @@
         {
           "type": "named",
           "data": {
-            "name": "OuttakeFirst"
+            "name": "CoralScoreSlow"
           }
         }
       ]

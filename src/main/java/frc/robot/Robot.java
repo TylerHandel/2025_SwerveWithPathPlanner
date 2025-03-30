@@ -32,12 +32,7 @@ public class Robot extends TimedRobot {
 
    // System.out.println("Coral detected: %s/f".formatted(Boolean.toString(CoralSensor.isCoralDetected())));
 
-  // Invert the joystick inputs if our alliance is red. The origin is always blue. 
-  // When our alliance is red, X and Y need to be inverted.
-  var alliance = DriverStation.getAlliance();
-  if (alliance.isPresent() && alliance.get() == Alliance.Red) {
-    m_robotContainer.joystickInvert = -1;
-  }
+  
 
   /* Update robot pose every cycle using Limelight cameras and AprilTags   */
     if (Constants.Vision.kUseLimelight) {
@@ -50,20 +45,43 @@ public class Robot extends TimedRobot {
       m_robotContainer.drivetrain.setVisionMeasurementStdDevs(VecBuilder.fill(.5, .5, 9999999));
 
       var m_limelightNames = Constants.Vision.kLimelightNames;
+      /*
+      if (LimelightHelpers.getTV(m_limelightNames[0])){
+        LimelightHelpers.SetRobotOrientation(m_limelightNames[0], headingDeg, 0, 0, 0, 0, 0);
+        var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(m_limelightNames[0]);
+        if (llMeasurement != null && llMeasurement.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
+          // This uses X,Y values from vision and resets pose of robot. 
+          m_robotContainer.drivetrain.addVisionMeasurement(llMeasurement.pose, llMeasurement.timestampSeconds);
+          System.out.println("LL " + m_limelightNames[0] + " Update: " + m_robotContainer.drivetrain.getState().Pose);
+        }
+      }
+      else if (LimelightHelpers.getTV(m_limelightNames[1])){
+        LimelightHelpers.SetRobotOrientation(m_limelightNames[1], headingDeg, 0, 0, 0, 0, 0);
+        var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(m_limelightNames[0]);
+        if (llMeasurement != null && llMeasurement.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
+          // This uses X,Y values from vision and resets pose of robot. 
+          m_robotContainer.drivetrain.addVisionMeasurement(llMeasurement.pose, llMeasurement.timestampSeconds);
+          System.out.println("LL " + m_limelightNames[1] + " Update: " + m_robotContainer.drivetrain.getState().Pose);
+        }
+      }
+      */
       for (String m_limelightName : m_limelightNames) {
-        /* Set robot orientation using gyro value */
+        // Set robot orientation using gyro value 
         LimelightHelpers.SetRobotOrientation(m_limelightName, headingDeg, 0, 0, 0, 0, 0);
         
-        /* Get pose estimate from Limelight assumes Blue field orientation */
+        // Get pose estimate from Limelight assumes Blue field orientation 
         var llMeasurement = LimelightHelpers.getBotPoseEstimate_wpiBlue_MegaTag2(m_limelightName);
         
         if (llMeasurement != null && llMeasurement.tagCount > 0 && Math.abs(omegaRps) < 2.0) {
-          /* This uses X,Y values from vision and resets pose of robot. */
+          // This uses X,Y values from vision and resets pose of robot. 
           m_robotContainer.drivetrain.addVisionMeasurement(llMeasurement.pose, llMeasurement.timestampSeconds);
           System.out.println("LL " + m_limelightName + " Update: " + m_robotContainer.drivetrain.getState().Pose);
         }
       }
+      
+      
     }
+
   }
 
   @Override

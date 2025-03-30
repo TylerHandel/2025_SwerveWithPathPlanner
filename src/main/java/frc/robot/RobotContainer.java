@@ -46,12 +46,7 @@ public class RobotContainer {
     private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
     private final SwerveRequest.RobotCentric driveRobotCentric = new SwerveRequest.RobotCentric();
     
-    // Assume Blue Alliance unless otherwise specified.
-    // Checks for alliance color in robotperiodic and sets to -1 if red.
-    // Use this to invert joystick inputs when on Red Alliance.
-    // This means that when on Red or Blue team, origin is always Blue[0,0]
-    // But driver drives "forward" on red or blue side to move robot forward, etc.
-    public int joystickInvert = 1; 
+    
 
     //private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
     /* private final SwerveRequest.RobotCentric forwardStraight = new SwerveRequest.RobotCentric()
@@ -84,7 +79,7 @@ public class RobotContainer {
         NamedCommands.registerCommand("PathfindToApriltagOffset", new PathfindToApriltagOffset(m_VisionDriveSystem, m_aprilTagTarget));
         NamedCommands.registerCommand("DriveToNearestApriltag", new DriveToNearestApriltag(drivetrain));
 
-        autoChooser = AutoBuilder.buildAutoChooser("Tests");
+        autoChooser = AutoBuilder.buildAutoChooser("None");
         SmartDashboard.putData("Auto Mode", autoChooser);
 
         configureBindings();
@@ -108,8 +103,8 @@ public class RobotContainer {
         drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
-                drive.withVelocityX(-velocityCurveTranslate(joystick.getLeftY()) * MaxSpeed * joystickInvert) // Drive forward with negative Y (forward)
-                    .withVelocityY(-velocityCurveTranslate(joystick.getLeftX()) * MaxSpeed * joystickInvert) // Drive left with negative X (left)
+                drive.withVelocityX(-velocityCurveTranslate(joystick.getLeftY()) * MaxSpeed) // Drive forward with negative Y (forward)
+                    .withVelocityY(-velocityCurveTranslate(joystick.getLeftX()) * MaxSpeed) // Drive left with negative X (left)
                     .withRotationalRate(-joystick.getRightX() * MaxAngularRate) // Rotate with right stick X
             )
         );

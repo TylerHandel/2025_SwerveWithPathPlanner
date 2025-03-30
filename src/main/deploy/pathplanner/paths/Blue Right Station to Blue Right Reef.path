@@ -8,20 +8,20 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.0078073944371093,
-        "y": 2.5283442841681687
+        "x": 3.080840163934426,
+        "y": 1.3217725409836065
       },
       "isLocked": false,
       "linkedName": "Blue Right Station"
     },
     {
       "anchor": {
-        "x": 3.861,
-        "y": 2.8939999999999997
+        "x": 3.8360655737704916,
+        "y": 2.904149590163935
       },
       "prevControl": {
-        "x": 3.734412722701847,
-        "y": 2.540665665678915
+        "x": 3.710393157885778,
+        "y": 2.526565245927281
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -119.03132259710246
+    "rotation": -119.99999999999999
   },
   "reversed": false,
   "folder": null,
