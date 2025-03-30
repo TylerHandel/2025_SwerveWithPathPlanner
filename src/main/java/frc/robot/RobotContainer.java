@@ -45,8 +45,6 @@ public class RobotContainer {
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
     private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
     private final SwerveRequest.RobotCentric driveRobotCentric = new SwerveRequest.RobotCentric();
-    
-    
 
     //private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
     /* private final SwerveRequest.RobotCentric forwardStraight = new SwerveRequest.RobotCentric()
