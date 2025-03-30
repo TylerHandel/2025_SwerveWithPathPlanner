@@ -27,7 +27,6 @@ public final class Constants {
         public static final String kLimelightFront = "limelight-front";
         public static final String kLimelightBack = "limelight-back";
         public static final String[] kLimelightNames = {
-            kLimelightFront,
             kLimelightBack
         };
         public static final double kReefOffsetRight = 25.0; // inches - total is 6'4" wide

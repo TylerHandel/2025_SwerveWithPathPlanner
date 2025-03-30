@@ -21,7 +21,7 @@ public class CoralScoreFast extends Command{
     }
     @Override
     public boolean isFinished() {
-        return time.get() > 1;
+        return time.get() > 0.5;
     }
 
     @Override
