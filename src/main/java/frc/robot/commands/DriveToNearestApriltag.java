@@ -18,9 +18,10 @@ public class DriveToNearestApriltag extends Command{
 
     @Override
     public void initialize() {
-        driveRobotCentric.withVelocityY(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[0]*5)
-            .withVelocityX(LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[2]*1)
-            .withRotationalRate((-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[4]*0.1)); 
+        double[] botPose = LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack);
+        driveRobotCentric.withVelocityY(-botPose[0]*5)
+            .withVelocityX(botPose[2]*1)
+            .withRotationalRate((-botPose[4]*0.1)); 
     }
 
     @Override
