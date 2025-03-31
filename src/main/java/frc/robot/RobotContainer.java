@@ -18,6 +18,7 @@ import com.reduxrobotics.canand.CanandEventLoop;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
@@ -116,15 +117,7 @@ public class RobotContainer {
 
         //  When holding down B key, drive toward the nearest AprilTag
                
-        joystick.b().whileTrue(
-          
-            drivetrain.applyRequest(() -> 
-             
-                driveRobotCentric.withVelocityY(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[0]*5)
-                .withVelocityX(LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[2]*1)
-                .withRotationalRate((-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[4]*0.1)) 
-                )
-        ).and(() -> LimelightHelpers.getTV(Constants.Vision.kLimelightBack) );
+        joystick.b().whileTrue(getDriveToNearestApriltagCommand(drivetrain));
         
 
         //joystick.pov(0).whileTrue(drivetrain.applyRequest(() ->
@@ -162,6 +155,21 @@ public class RobotContainer {
 
         drivetrain.registerTelemetry(logger::telemeterize);
         
+    }
+
+    private boolean isApriltagVisible() {
+      return LimelightHelpers.getTV(Constants.Vision.kLimelightBack);
+    }
+
+    /*
+     * Get a command that drives the robot toward the nearest visible apriltag
+     */
+    private Command getDriveToNearestApriltagCommand(CommandSwerveDrivetrain drivetrain) {
+      return Commands.either(
+          new DriveToNearestApriltag(drivetrain),
+          Commands.none(),
+          this::isApriltagVisible
+      );
     }
 
     public void configureCanandColor() {
