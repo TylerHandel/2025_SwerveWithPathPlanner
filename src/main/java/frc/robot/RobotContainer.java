@@ -124,7 +124,7 @@ public class RobotContainer {
                 .withVelocityX(LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[2]*1)
                 .withRotationalRate((-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[4]*0.1)) 
                 )
-        );  
+        ).and(() -> LimelightHelpers.getTV(Constants.Vision.kLimelightBack));
         
 
         //joystick.pov(0).whileTrue(drivetrain.applyRequest(() ->
