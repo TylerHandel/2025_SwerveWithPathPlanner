@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Blue Left to Blue Reef Left"
+            "pathName": "Left Start to Far Reef"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Blue Left Reef to Blue Left Station"
+            "pathName": "Left Far Reef to Station"
           }
         },
         {
@@ -41,7 +41,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Blue Left Station to Blue Left Reef"
+                  "pathName": "Left Station to Reef"
                 }
               }
             ]
@@ -56,7 +56,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Blue Left Reef to Blue Left Station"
+            "pathName": "Left Reef to Station"
           }
         },
         {
@@ -72,7 +72,7 @@
               {
                 "type": "path",
                 "data": {
-                  "pathName": "Blue Left Station to Blue Left Reef"
+                  "pathName": "Left Station to Reef"
                 }
               },
               {
@@ -88,6 +88,12 @@
           "type": "named",
           "data": {
             "name": "CoralScoreSlow"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Left Reef to Station"
           }
         }
       ]

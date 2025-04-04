@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Blue Right to Blue Right Reef"
+            "pathName": "Right Start to Far Reef"
           }
         },
         {
@@ -19,7 +19,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Blue Right Reef to Blue Right Station"
+            "pathName": "Right Far Reef to Station"
           }
         },
         {
@@ -29,15 +29,22 @@
           }
         },
         {
-          "type": "named",
+          "type": "parallel",
           "data": {
-            "name": "CoralIntakeStart"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "Blue Right Station to Blue Right Reef"
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "CoralIntakeStart"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Right Station to Reef"
+                }
+              }
+            ]
           }
         },
         {
@@ -49,7 +56,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Blue Right Reef to Blue Right Station"
+            "pathName": "Right Reef to Station"
           }
         },
         {
@@ -59,15 +66,34 @@
           }
         },
         {
+          "type": "parallel",
+          "data": {
+            "commands": [
+              {
+                "type": "named",
+                "data": {
+                  "name": "CoralIntakeStart"
+                }
+              },
+              {
+                "type": "path",
+                "data": {
+                  "pathName": "Right Station to Reef"
+                }
+              }
+            ]
+          }
+        },
+        {
           "type": "named",
           "data": {
-            "name": "CoralIntakeStart"
+            "name": "CoralScoreSlow"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "Blue Right Station to Blue Right Reef"
+            "pathName": "Right Reef to Station"
           }
         }
       ]

@@ -8,24 +8,24 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 5.399098631290707,
-        "y": 6.728566384454127
+        "x": 5.438289125885446,
+        "y": 6.757695274795931
       },
       "isLocked": false,
-      "linkedName": "Blue Startline Pos 1"
+      "linkedName": "Left Startline"
     },
     {
       "anchor": {
-        "x": 3.8360655737721374,
+        "x": 3.85,
         "y": 5.158
       },
       "prevControl": {
-        "x": 3.4764344262311546,
-        "y": 5.781360655737705
+        "x": 3.5811325965486547,
+        "y": 5.94076952551561
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Blue Reef Top Left"
+      "linkedName": "Left Reef"
     }
   ],
   "rotationTargets": [],
@@ -54,10 +54,10 @@
   ],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 5.0,
+    "maxVelocity": 5.6,
     "maxAcceleration": 5.0,
-    "maxAngularVelocity": 1080.0,
-    "maxAngularAcceleration": 1080.0,
+    "maxAngularVelocity": 720.0,
+    "maxAngularAcceleration": 1440.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
@@ -66,7 +66,7 @@
     "rotation": 119.99999999999999
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Left Side",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 0.0

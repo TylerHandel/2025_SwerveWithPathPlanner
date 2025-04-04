@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 10.429303278688524,
-        "y": 1.45
+        "x": 5.15,
+        "y": 5.158
       },
       "prevControl": null,
       "nextControl": {
-        "x": 12.700413934430511,
-        "y": 1.5185000000000002
+        "x": 3.705,
+        "y": 6.3260000000000005
       },
       "isLocked": false,
-      "linkedName": "Red Startline Pos 2"
+      "linkedName": "Left Far Reef"
     },
     {
       "anchor": {
-        "x": 13.737909836065574,
-        "y": 2.904149590163935
+        "x": 1.1028688524590162,
+        "y": 6.979969262295082
       },
       "prevControl": {
-        "x": 14.098659836065577,
-        "y": 2.192399590163935
+        "x": 2.7592499999999998,
+        "y": 6.521
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Red Reef Bottom Right"
+      "linkedName": "Left Station"
     }
   ],
   "rotationTargets": [],
@@ -33,22 +33,22 @@
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 5.0,
+    "maxVelocity": 5.6,
     "maxAcceleration": 5.0,
-    "maxAngularVelocity": 1080.0,
-    "maxAngularAcceleration": 1080.0,
+    "maxAngularVelocity": 720.0,
+    "maxAngularAcceleration": 1440.0,
     "nominalVoltage": 12.0,
     "unlimited": false
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -59.99999999999999
+    "rotation": -53.81522102322314
   },
   "reversed": false,
-  "folder": null,
+  "folder": "Left Side",
   "idealStartingState": {
-    "velocity": 0.0,
-    "rotation": 0.0
+    "velocity": 0,
+    "rotation": 59.99999999999999
   },
   "useDefaultConstraints": true
 }
