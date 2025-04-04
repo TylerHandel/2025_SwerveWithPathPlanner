@@ -18,6 +18,7 @@ import com.reduxrobotics.canand.CanandEventLoop;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
@@ -98,6 +99,9 @@ public class RobotContainer {
           return 0;
         }
       }
+    
+    
+    
 
     private void configureBindings() {
         // Note that X is defined as forward according to WPILib convention,
@@ -117,14 +121,18 @@ public class RobotContainer {
         //  When holding down B key, drive toward the nearest AprilTag
                
         joystick.b().whileTrue(
-          
-            drivetrain.applyRequest(() -> 
-             
-                driveRobotCentric.withVelocityY(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[0]*5)
-                .withVelocityX(LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[2]*1)
-                .withRotationalRate((-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[4]*0.1)) 
-                )
-        );  
+            Commands.either(
+                drivetrain.applyRequest(() -> 
+                    driveRobotCentric.withVelocityY(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[0] * 5)
+                    .withVelocityX(LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[2] * 1)
+                    .withRotationalRate(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[4] * 0.1)
+                ),
+                null
+                ,
+                () -> LimelightHelpers.getTV(Constants.Vision.kLimelightBack)
+            )
+        );
+        
         
 
         //joystick.pov(0).whileTrue(drivetrain.applyRequest(() ->
