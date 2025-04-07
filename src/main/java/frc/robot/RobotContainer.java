@@ -26,6 +26,7 @@ import frc.robot.commands.ClimbDown;
 import frc.robot.commands.ClimbUp;
 import frc.robot.commands.FollowPathToReef;
 import frc.robot.commands.PathfindToApriltagOffset;
+import frc.robot.commands.SetLEDMode;
 import frc.robot.commands.CoralIntakeStart;
 import frc.robot.commands.CoralScoreSlow;
 import frc.robot.commands.CoralScoreFast;
@@ -119,19 +120,30 @@ public class RobotContainer {
         joystick.povRight().whileTrue(drivetrain.applyRequest(() -> brake));
 
         //  When holding down B key, drive toward the nearest AprilTag
-               
+         /*   
         joystick.b().whileTrue(
+            
             Commands.either(
                 drivetrain.applyRequest(() -> 
                     driveRobotCentric.withVelocityY(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[0] * 5)
                     .withVelocityX(LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[2] * 1)
                     .withRotationalRate(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[4] * 0.1)
                 ),
-                null
+                Commands.none()
                 ,
                 () -> LimelightHelpers.getTV(Constants.Vision.kLimelightBack)
             )
+            
         );
+        */
+        
+        joystick.b().whileTrue(
+            drivetrain.applyRequest(() -> 
+                    driveRobotCentric.withVelocityY(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[0] * 5)
+                    .withVelocityX(LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[2] * 1)
+                    .withRotationalRate(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[4] * 0.1)
+                
+        ));
         
         
 
@@ -164,6 +176,7 @@ public class RobotContainer {
         
         joystick.povLeft().whileTrue(new CoralThrowup(m_launcher).withTimeout(2));
 
+        //joystick.b().onTrue(new SetLEDMode(Constants.Vision.kLimelightBack));
         // Drive to reef apriltag 6 - need to generalize this later
       //  joystick.b().whileTrue(new FollowPathToReef(m_VisionDriveSystem, m_aprilTagTarget));
         

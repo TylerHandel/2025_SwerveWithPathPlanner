@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.33875,
-        "y": 2.1334999999999997
+        "x": 4.60327868852459,
+        "y": 2.005071721311474
       },
       "isLocked": false,
       "linkedName": "Right Far Reef"
@@ -30,11 +30,22 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "pointTowardsZones": [],
+  "pointTowardsZones": [
+    {
+      "fieldPosition": {
+        "x": 0.75,
+        "y": 0.75
+      },
+      "rotationOffset": 180.0,
+      "minWaypointRelativePos": 0.47493573264781297,
+      "maxWaypointRelativePos": 0.8194087403598915,
+      "name": "Point Towards Zone"
+    }
+  ],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 5.6,
-    "maxAcceleration": 5.0,
+    "maxVelocity": 5.0,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 720.0,
     "maxAngularAcceleration": 1440.0,
     "nominalVoltage": 12.0,
