@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 3.85,
-        "y": 5.158
+        "x": 3.6322745901639335,
+        "y": 5.505481557377049
       },
       "prevControl": {
-        "x": 3.5811325965486547,
-        "y": 5.94076952551561
+        "x": 3.363407186712588,
+        "y": 6.288251082892659
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Left Reef"
+      "linkedName": "Left Reef Dock"
     }
   ],
   "rotationTargets": [],
@@ -54,7 +54,7 @@
   ],
   "eventMarkers": [],
   "globalConstraints": {
-    "maxVelocity": 5.0,
+    "maxVelocity": 3.0,
     "maxAcceleration": 4.0,
     "maxAngularVelocity": 720.0,
     "maxAngularAcceleration": 1440.0,
