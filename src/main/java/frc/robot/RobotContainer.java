@@ -15,10 +15,12 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import com.reduxrobotics.canand.CanandEventLoop;
 
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
@@ -67,6 +69,9 @@ public class RobotContainer {
     private final Climber m_climber = new Climber();
     private final CANdleSystem m_CANdle = new CANdleSystem(joystick);
     private final VisionDriveSystem m_VisionDriveSystem = new VisionDriveSystem();
+    final SlewRateLimiter xLimiter = new SlewRateLimiter(2.0);
+    final SlewRateLimiter yLimiter = new SlewRateLimiter(2.0);
+    final SlewRateLimiter rotLimiter = new SlewRateLimiter(2.0);
 
     /* Path follower */ 
     private final SendableChooser<Command> autoChooser;
@@ -88,6 +93,7 @@ public class RobotContainer {
 
         configureBindings();
         configureCanandColor();
+        
     }
 
     /* Modulate speed of swerve drive based on joystick input */
@@ -135,15 +141,36 @@ public class RobotContainer {
             )
             
         );
+
+        */
+        /* 
+        joystick.b().whileTrue(
+            new RunCommand(() -> {
+                double tx = LimelightHelpers.getTX(Constants.Vision.kLimelightBack);
+                double[] pose = LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack);
+
+                double xSpeed = xLimiter.calculate(pose[2]); // forward/backward (Z)
+                double ySpeed = yLimiter.calculate(-pose[0]); // left/right (X)
+                double rotSpeed = rotLimiter.calculate(-0.1 * tx); // rotation
+
+                drivetrain.applyRequest(() ->
+                    driveRobotCentric
+                        .withVelocityX(xSpeed)
+                        .withVelocityY(ySpeed)
+                        .withRotationalRate(rotSpeed)
+                );
+            }, drivetrain)
+        );
         */
         
         joystick.b().whileTrue(
             drivetrain.applyRequest(() -> 
-                    driveRobotCentric.withVelocityY(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[0] * 5)
-                    .withVelocityX(LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[2] * 1)
-                    .withRotationalRate(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[4] * 0.1)
+                    driveRobotCentric.withVelocityY(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[0] * 4)
+                    .withVelocityX(LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[2] * 1.25)
+                    .withRotationalRate(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[4] * 0.05)   //withRotationalRate(-LimelightHelpers.getBotPose_TargetSpace(Constants.Vision.kLimelightBack)[4] * 0.05)
                 
         ));
+        
         
         
 
