@@ -19,6 +19,7 @@ import com.ctre.phoenix.led.ColorFlowAnimation.Direction;
 import com.ctre.phoenix.led.LarsonAnimation.BounceMode;
 import com.ctre.phoenix.led.TwinkleAnimation.TwinklePercent;
 import com.ctre.phoenix.led.TwinkleOffAnimation.TwinkleOffPercent;
+import frc.robot.subsystems.CoralSensor;
 
 public class CANdleSystem extends SubsystemBase {
     private final CANdle m_candle = new CANdle(Constants.CANdle.kCANdleID);
@@ -148,7 +149,7 @@ public class CANdleSystem extends SubsystemBase {
                 m_toAnimate = new SingleFadeAnimation(50, 2, 200, 0, 0.5, LedCount);
                 break;
             case StrobeOrange:
-                m_toAnimate = new StrobeAnimation(255, 20, 0, 0, 98.0 / 256.0, LedCount);
+                m_toAnimate = new StrobeAnimation(0, 255, 0, 0, 98.0 / 256.0, LedCount);
                 break;
             case Twinkle:
                 m_toAnimate = new TwinkleAnimation(30, 70, 60, 0, 0.4, LedCount, TwinklePercent.Percent6);
@@ -174,6 +175,7 @@ public class CANdleSystem extends SubsystemBase {
             m_candle.animate(m_toAnimate);
         }
         m_candle.modulateVBatOutput(joystick.getRightY());
+        /* 
         if (LimelightHelpers.getTV(Constants.Vision.kLimelightBack)){
             if (joystick.b().getAsBoolean()){
                 changeAnimation(AnimationTypes.StrobeOrange);
@@ -185,7 +187,13 @@ public class CANdleSystem extends SubsystemBase {
         else {
             changeAnimation(AnimationTypes.Rainbow);
         }
-    
+        */
+        if (CoralSensor.isCoralDetected()){
+            changeAnimation(AnimationTypes.StrobeOrange);
+        }
+        else{
+            changeAnimation(AnimationTypes.Rainbow);
+        }
         m_candle.animate(m_toAnimate);
     }
 

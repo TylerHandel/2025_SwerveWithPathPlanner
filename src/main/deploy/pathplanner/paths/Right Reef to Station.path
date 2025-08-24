@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.533133099722718,
-        "y": 2.892361994971534
+        "x": 2.984938524590163,
+        "y": 1.6454405737704905
       },
       "isLocked": false,
       "linkedName": "Right Reef"
@@ -20,8 +20,8 @@
         "y": 1.022079918032788
       },
       "prevControl": {
-        "x": 1.7114384212855804,
-        "y": 1.9596707522604007
+        "x": 1.971908549943119,
+        "y": 2.081175568687401
       },
       "nextControl": null,
       "isLocked": false,
@@ -30,18 +30,7 @@
   ],
   "rotationTargets": [],
   "constraintZones": [],
-  "pointTowardsZones": [
-    {
-      "fieldPosition": {
-        "x": 0.875,
-        "y": 0.6
-      },
-      "rotationOffset": 180.0,
-      "minWaypointRelativePos": 0.49905213270142046,
-      "maxWaypointRelativePos": 0.6127962085308127,
-      "name": "Point Towards Zone"
-    }
-  ],
+  "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {
     "maxVelocity": 3.0,
@@ -53,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 53.47114463301483
+    "rotation": 55.56101069119632
   },
   "reversed": false,
   "folder": "Right Side",

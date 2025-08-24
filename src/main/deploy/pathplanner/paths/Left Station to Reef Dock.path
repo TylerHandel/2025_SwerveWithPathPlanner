@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 0.8579937725811663,
-        "y": 7.30955274238944
+        "x": 0.8001881533722393,
+        "y": 7.167768402790343
       },
       "isLocked": false,
       "linkedName": "Left Station"
@@ -20,21 +20,30 @@
         "y": 5.1698258196721305
       },
       "prevControl": {
-        "x": 2.9130122950819666,
-        "y": 5.817161885245902
+        "x": 3.645604325488681,
+        "y": 5.712612795686314
       },
       "nextControl": null,
       "isLocked": false,
       "linkedName": "Left Reef"
     }
   ],
-  "rotationTargets": [
+  "rotationTargets": [],
+  "constraintZones": [
     {
-      "waypointRelativePos": 0.7004592016955128,
-      "rotationDegrees": 119.99999999999999
+      "name": "Constraints Zone",
+      "minWaypointRelativePos": 0.7499999999999944,
+      "maxWaypointRelativePos": 1.0,
+      "constraints": {
+        "maxVelocity": 3.0,
+        "maxAcceleration": 2.0,
+        "maxAngularVelocity": 720.0,
+        "maxAngularAcceleration": 1440.0,
+        "nominalVoltage": 12.0,
+        "unlimited": false
+      }
     }
   ],
-  "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
   "globalConstraints": {

@@ -29,7 +29,7 @@ public class Robot extends TimedRobot {
     m_robotContainer = new RobotContainer();
     SmartDashboard.putData("Field", m_field);
     
-    LimelightHelpers.setLEDMode_ForceOff(Constants.Vision.kLimelightBack);
+    //LimelightHelpers.setLEDMode_ForceOff(Constants.Vision.kLimelightBack);
   }
 
   @Override
@@ -104,7 +104,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void disabledInit() {
-    LimelightHelpers.setLEDMode_ForceOff(Constants.Vision.kLimelightBack);
+    //LimelightHelpers.setLEDMode_ForceOff(Constants.Vision.kLimelightBack);
   }
   
   @Override
@@ -120,7 +120,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
     }
-    LimelightHelpers.setLEDMode_ForceOn(Constants.Vision.kLimelightBack);
+    //LimelightHelpers.setLEDMode_ForceOn(Constants.Vision.kLimelightBack);
   }
 
   @Override
@@ -128,7 +128,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousExit() {
-    LimelightHelpers.setLEDMode_ForceOff(Constants.Vision.kLimelightBack);
+    //LimelightHelpers.setLEDMode_ForceOff(Constants.Vision.kLimelightBack);
   }
   
   @Override
@@ -136,7 +136,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    LimelightHelpers.setLEDMode_ForceOn(Constants.Vision.kLimelightBack);
+    //LimelightHelpers.setLEDMode_ForceOn(Constants.Vision.kLimelightBack);
   }
 
   @Override
@@ -144,7 +144,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopExit() {
-    LimelightHelpers.setLEDMode_ForceOff(Constants.Vision.kLimelightBack);
+    //LimelightHelpers.setLEDMode_ForceOff(Constants.Vision.kLimelightBack);
   }
 
   @Override
