@@ -166,35 +166,23 @@ public class CANdleSystem extends SubsystemBase {
 
     @Override
     public void periodic() {
-        // This method will be called once per scheduler run
-        if(m_toAnimate == null) {
-            m_candle.setLEDs((int)(joystick.getLeftTriggerAxis() * 255), 
-                              (int)(joystick.getRightTriggerAxis() * 255), 
-                              (int)(joystick.getLeftX() * 255));
-        } else {
-            m_candle.animate(m_toAnimate);
-        }
-        m_candle.modulateVBatOutput(joystick.getRightY());
-        /* 
-        if (LimelightHelpers.getTV(Constants.Vision.kLimelightBack)){
-            if (joystick.b().getAsBoolean()){
-                changeAnimation(AnimationTypes.StrobeOrange);
-            }
-            else {
-                changeAnimation(AnimationTypes.Fire);
-            }
-        }
-        else {
-            changeAnimation(AnimationTypes.Rainbow);
-        }
-        */
-        if (CoralSensor.isCoralDetected()){
-            changeAnimation(AnimationTypes.StrobeOrange);
-        }
-        else{
-            changeAnimation(AnimationTypes.Rainbow);
-        }
-        m_candle.animate(m_toAnimate);
+
+
+        changeAnimation(AnimationTypes.Fire);
+
+
+
+
+
+
+
+
+
+
+
+        //EDIT code ABOVE^^^
+        
+        m_candle.animate(m_toAnimate);//DO NOT REMOVE
     }
 
     @Override
