@@ -24,9 +24,15 @@ public class FollowPathToReef extends Command{
     
     @Override
     public void initialize() {
+
         PathPlannerPath path = m_VisionDriveSystem.getPathToVisionTarget(aprilTagTarget);
-        pathCommand = AutoBuilder.followPath(path);
-        pathCommand.schedule();  // Start the path
+
+        if (path != null) { // Check if the path is not null
+            pathCommand = AutoBuilder.followPath(path);
+            pathCommand.schedule();  // Start the path
+        } else {
+            System.out.println("Error: Path is null. Cannot follow path.");
+        }
     }
     @Override
     public boolean isFinished() {

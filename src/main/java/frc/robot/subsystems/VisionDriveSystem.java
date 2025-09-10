@@ -34,6 +34,8 @@ public class VisionDriveSystem implements Subsystem {
 
         // Get the pose of the AprilTag
         Optional<Pose3d> targetPose3d = FieldConstants.getTagPose(aprilTagTarget); // Get the pose of the AprilTag
+        if (targetPose3d.isEmpty()) {
+
         
         /* Old code to look up apriltag pose info
         double targetX = m_AprilTagTargetData[0] * InchestoMeters;   // X coordinate in inches
@@ -75,6 +77,10 @@ public class VisionDriveSystem implements Subsystem {
         // Prevent the path from being flipped if the coordinates are already correct  
         path.preventFlipping = true;
        return path;
+        } else {
+            System.out.println("AprilTag " + aprilTagTarget + " not found on field.");
+            return null;
+        }
     }
 
      // An accessor method to create the path to the AprilTag target
@@ -92,7 +98,7 @@ public class VisionDriveSystem implements Subsystem {
         // Translate the target from the center of the tag to the center of the robot + 1 meter back
         double translatedTargetOffsetX = targetX + (Constants.Vision.kLengthOfRobot+offsetDistance)*InchestoMeters*Math.cos(targetRot.getDegrees());
         double translatedTargetOffsetY = targetY + (Constants.Vision.kLengthOfRobot+offsetDistance)*InchestoMeters*Math.sin(targetRot.getDegrees());
-        
+    
          // Create a list of waypoints from poses. Each pose represents one waypoint.
         // The rotation component of the pose should be the direction of travel. Do not use holonomic rotation.
         List<Waypoint> waypoints = PathPlannerPath.waypointsFromPoses(
